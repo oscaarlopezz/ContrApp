@@ -1,0 +1,98 @@
+/* Importar la fuente de texto desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap'); 
+
+/* Estilos para todo el documento */
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Estilos para el cuerpo */
+body
+{
+    background:  #ADD8E6;
+}
+
+/* Estilos para los contenedores */
+.container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+/* Estilos para la caja que contiene los inputs */
+.box
+{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 25px;
+    border-radius: 20px;
+}
+
+.form-box
+{
+    width: 450px;
+    margin: 0px 10px;
+}
+
+/* Estilos para el encabezado del formulario */
+.form-box header
+{
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los campos */
+.form-box form .field
+{
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+/* Estilos para los inputs */
+.form-box form .input input
+{
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+/* Estilos de botón */
+.btn
+{
+    height: 35px;
+    background: #22dff6;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: 10px;
+    padding: 0px 10px;
+}
+
+.sumbit
+{
+    width: 100%;
+}
+
+/* Estilos enlace */
+.links
+{
+    margin-bottom: 15px;
+}
