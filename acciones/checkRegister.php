@@ -2,22 +2,38 @@
     session_start();
     include_once('../herramientas/conexion.php');
 
-    // Comprobar si el usuario y el correo electrónico ya existen en la base de datos
-    $consultaVerificarExistencia = "SELECT COUNT(*) as total FROM usuarios WHERE email = ?";
-    $stmtVerificarExistencia = mysqli_prepare($conn, $consultaVerificarExistencia);
-    mysqli_stmt_bind_param($stmtVerificarExistencia, "s", $_SESSION['email']);
-    mysqli_stmt_execute($stmtVerificarExistencia);
-    mysqli_stmt_bind_result($stmtVerificarExistencia, $total);
-    mysqli_stmt_fetch($stmtVerificarExistencia);
-    mysqli_stmt_close($stmtVerificarExistencia);
+    // Comprobar si el correo electrónico ya existe en la base de datos
+    $consultaVerificarExistenciaCorreo = "SELECT COUNT(*) as total FROM usuarios WHERE email = ?";
+    $stmtVerificarExistenciaCorreo = mysqli_prepare($conn, $consultaVerificarExistenciaCorreo);
+    mysqli_stmt_bind_param($stmtVerificarExistenciaCorreo, "s", $_SESSION['email']);
+    mysqli_stmt_execute($stmtVerificarExistenciaCorreo);
+    mysqli_stmt_bind_result($stmtVerificarExistenciaCorreo, $totalCorreo);
+    mysqli_stmt_fetch($stmtVerificarExistenciaCorreo);
+    mysqli_stmt_close($stmtVerificarExistenciaCorreo);
 
-    if ($total > 0) 
+    if ($totalCorreo > 0) 
     {
-        // El nombre de usuario o el correo electrónico ya existen, mostrar un mensaje de error.
+        // El correo electrónico ya exist, mostrar un mensaje de error.
         header('Location: ../view/register.php?error=El correo electrónico ya está registrado');
         exit();
     } 
-    
+
+    // Comprobar si el usuario ya existe en la base de datos
+    $consultaVerificarExistenciaUser = "SELECT COUNT(*) as total FROM usuarios WHERE username = ?";
+    $stmtVerificarExistenciaUser = mysqli_prepare($conn, $consultaVerificarExistenciaUser);
+    mysqli_stmt_bind_param($stmtVerificarExistenciaUser, "s", $_SESSION['user']);
+    mysqli_stmt_execute($stmtVerificarExistenciaUser);
+    mysqli_stmt_bind_result($stmtVerificarExistenciaUser, $totalUser);
+    mysqli_stmt_fetch($stmtVerificarExistenciaUser);
+    mysqli_stmt_close($stmtVerificarExistenciaUser);
+
+    if ($totalUser > 0) 
+    {
+        // El nombre de usuario ya existe, mostrar un mensaje de error.
+        header('Location: ../view/register.php?error=El nombre de usuario ya está registrado');
+        exit();
+    } 
+     
     else 
     {
         // Si no existen, procede a insertar los datos en la base de datos
