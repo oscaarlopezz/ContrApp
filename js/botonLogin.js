@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function()
     campoPass.addEventListener("change", validateForm);
 
     // Define la función "validateForm" que se ejecutará cuando cambie el contenido de los campos de usuario y contraseña
-    function validateForm() {
+    function validateForm() 
+    {
         // Comprueba si ambos campos no están vacíos (sin espacios en blanco)
         if (campoUser.value.trim() !== "" && campoPass.value.trim() !== "") 
         {

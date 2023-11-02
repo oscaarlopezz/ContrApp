@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function validateForm() {
         const userValue = userField.value.trim();
         const emailValue = emailField.value.trim();
-        const passValue = passField.value;
+        const passValue = passField.value.trim();
 
         // Valida el campo de usuario
         const alertaUser = document.getElementById('alertauser');
@@ -40,14 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Valida el campo de contraseña
         const alertaPass = document.getElementById('alertapass');
-        if (passValue.length < 1 || passValue.length < 9) {
-            alertaPass.style.display = 'block'; // Muestra la alerta de contraseña si no cumple con la validación
+        if (passValue.length !== 9) {
+            alertaPass.style.display = 'block'; // Muestra la alerta de contraseña si no tiene exactamente 9 caracteres
         } else {
-            alertaPass.style.display = 'none'; // Oculta la alerta de contraseña si es válida
+            alertaPass.style.display = 'none'; // Oculta la alerta de contraseña en otros casos
         }
 
         // Comprueba si todos los campos son válidos y habilita/deshabilita el botón de envío
-        if (userRegex.test(userValue) && emailRegex.test(emailValue) && passValue.length >= 9) {
+        if (userRegex.test(userValue) && emailRegex.test(emailValue) && passValue.length === 9) {
             btnEnviar.removeAttribute("disabled"); // Habilita el botón de envío si todos los campos son válidos
         } else {
             btnEnviar.setAttribute("disabled", "disabled"); // Deshabilita el botón de envío si al menos uno de los campos no es válido

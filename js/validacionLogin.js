@@ -1,10 +1,3 @@
-// Define una función para validar el campo de usuario utilizando una expresión regular
-function validarUser(user) 
-{
-    const regex = /^[a-zA-Z]*$/; // La expresión regular permite solo letras (mayúsculas y minúsculas)
-    return regex.test(user); // Devuelve true si el usuario cumple con la expresión regular
-}
-
 document.addEventListener("DOMContentLoaded", function () 
 {
     // Obtiene referencias a los campos de usuario y contraseña
@@ -24,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function ()
             alertauser.style.display = 'none'; // Oculta la alerta de usuario si es válido
         } 
         
-        else if (user.value.length < 1) 
-        {
+        else if (user.value.length < 1) {
+
             alertauser.style.display = 'none'; // Oculta la alerta de usuario si el campo está vacío
         } 
         
-        else 
+        else
         {
             alertauser.style.display = 'block'; // Muestra la alerta de usuario si no cumple con la validación
         }
@@ -43,14 +36,9 @@ document.addEventListener("DOMContentLoaded", function ()
         const alertapass = document.getElementById('alertapass');
 
         // Comprueba la longitud de la contraseña y muestra la alerta correspondiente
-        if (pass.value.length < 1) 
+        if (pass.value.length !== 9) 
         {
-            alertapass.style.display = 'none'; // Oculta la alerta de contraseña si el campo está vacío
-        } 
-        
-        else if (pass.value.length < 9) 
-        {
-            alertapass.style.display = 'block'; // Muestra la alerta de contraseña si es demasiado corta
+            alertapass.style.display = 'block'; // Muestra la alerta de contraseña si no tiene 9 caracteres
         } 
         
         else 

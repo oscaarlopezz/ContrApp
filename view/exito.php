@@ -11,6 +11,7 @@
             session_start();
 
             echo "Se ha introducido el usuario " . $_SESSION['user'] . " , con la cuenta de correo " . $_SESSION['email'] . " y con la contraseña " . $_SESSION['pass'];
+            echo "<br><a href = '../view/login.php'>Clica aquí para iniciar sesión</a><br>";
         ?>
     </body>
 </html>
