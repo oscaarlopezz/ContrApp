@@ -11,7 +11,7 @@
         <div class="container">
             <div class="box form-box">
                 <header>Registrarse</header>
-                <form action="" method="post">
+                <form action="../acciones/validarRegister.php" method="post">
                     <div class="field input">
                         <label for="user">Nombre de usuario:</label>
                         <input type="text" name="user" id="user">   
@@ -26,12 +26,12 @@
 
                     <div class="field input">
                         <label for="pass">Contraseña:</label>
-                        <input type="text" name="pass" id="pass">    
+                        <input type="password" name="pass" id="pass">    
                         <p style="display: none; color: red; font-size: 15px;" id="alertapass">¡La contraseña debe de tener almenos 9 caracteres!</p> <!-- El mensaje de error permanece oculto hasta que detecta que la contraseña es lo suficientemente larga. -->         
                     </div>
 
                     <div class="field">
-                        <input type="submit" name="enviar" id="btnEnviar" class="btn" value="Enviar" disabled>
+                        <input type="submit" name="btnEnviar" id="btnEnviar" class="btn" value="Enviar" disabled>
                     </div>
 
                     <div class="links">
