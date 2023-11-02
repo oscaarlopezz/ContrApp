@@ -20,15 +20,16 @@
 
             if ($row = mysqli_fetch_assoc($result)) 
             {   
-                echo "¡Bienvenido " . $_SESSION['user'] . "! La contraseña es CORRECTA"; // Si las contraseñas coinciden te da la bienvenida
-            }
-                
+                header('Location: ../view/exito.php');
+                exit();
+            }             
+            
             else
             {
-                header('Location ../view/login.php?Usuario o contraseña incorrectos'); // Se muestra el mensaje de error.
+                header('Location: ../view/login.php?Usuario o contraseña incorrectos'); // Se muestra el mensaje de error.
+                exit();
             }
-        }
-                        
+        }                        
     } 
   
     
