@@ -1,0 +1,21 @@
+body {
+    background: #ADD8E6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container {
+    text-align: center;
+}
+.pagination-container {
+    margin-top: 20px;
+}
+table thead {
+    background: black;
+    color: white;
+}
+table thead th {
+    text-align: center;
+}
