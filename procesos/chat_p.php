@@ -2,9 +2,15 @@
 include_once('../procesos/conexion.php');
 
 // Recuperar los datos enviados a través de POST
-$id_user = $_POST['id_user'];
-$receptor = $_POST['receptor'];
-// echo "<";
+$id_user2 = $_POST['id_user'];
+$receptor2 = $_POST['receptor'];
+$id_user = intval($id_user2);
+$receptor = intval($receptor2);
+
+// echo gettype($id_user); // Esto mostrará "integer"
+
+// echo gettype($receptor); // Esto mostrará "integer"
+
 
 // Consulta SQL con sentencia preparada
 $sql = "SELECT DISTINCT emisor_usuario.username AS emisor, m.emisor as id_emisor, receptor_usuario.username AS receptor, m.mensaje, m.fecha_envio
@@ -26,11 +32,13 @@ mysqli_stmt_execute($stmt);
 // Obtener el resultado
 $resultado = mysqli_stmt_get_result($stmt);
 
+
 if (mysqli_num_rows($resultado) > 0) {
     while ($row = mysqli_fetch_assoc($resultado)) {
-        if ($row['id_emisor'] === $id_user) {
+        $id_emisor = intval($row['id_emisor']);
+        if ($id_emisor === $id_user) {
             $float = "right";
-        } else {
+        } else{
             $float = "left";
         }
         echo '<div class="mensaje" style="text-align: ' . $float . '; width: 100%">';

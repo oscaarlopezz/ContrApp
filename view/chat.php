@@ -15,7 +15,7 @@ $id_user = 1;
     <div class="chat" id="chat-container">
 
     </div>
-    <form style="width: 80%;" id="enviarM">
+    <form id="enviarM">
             <input type="text" style="width: 80%; float: left" id="mensaje">
             <button type="submit" style="margin-left: 3%; border-radius: 10px;" onclick="Enviar()">Enviar</button>
     </form>
