@@ -15,10 +15,25 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <!-- Bootstrap -->
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+                <!-- Bootstrap JavaScript -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+                <!-- Otros recursos -->
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-                <!-- CSS -->
+                <!-- Bootstrap CSS -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+                <!-- jQuery -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                <!-- Popper.js -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+
+                <!-- Bootstrap JavaScript -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
+                <!-- CSS personalizado -->
                 <link rel="stylesheet" href="../css/stylesCrud.css">
                 <!-- TÍTULO -->
                 <title>Página de amigos de <?php echo $_SESSION['user'] ?></title>
@@ -70,27 +85,44 @@
                                         <tr>
                                             <th colspan="4">¡Bienvenido <?php echo $user ?>! Esta es tu lista de amigos:</th>
                                             <th class="text-right">
-                                                <button type="button" class="btn btn-success">
-                                                    <a href="../CRUD/añadir.php" style="color: white; text-decoration: none;">Añadir</a>
-                                                </button>
-                                                
-                                                <button type="button" class="btn btn-danger">
-                                                    <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
-                                                </button>
-                                                
+                                                <div class="btn-group" role="group" aria-label="Botones">
+                                                    <div>
+                                                        <button type="button" class="btn btn-success mr-2">
+                                                            <a href="../CRUD/añadir.php" style="color: white; text-decoration: none;">Añadir</a>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="dropdown" style="padding-right: 8px;">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                            Solicitudes
+                                                        </button>
+
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#">Action</a>
+                                                            <a class="dropdown-item" href="#">Another action</a>
+                                                            <a class="dropdown-item" href="#">Something else here</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger mr-2">
+                                                            <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </th>
+                                            <thead>
+                                                <tr>
+                                                    <td>Nombre del Amigo</td>
+                                                    <td>Abrir chat</td>
+                                                    <td>Editar</td>
+                                                    <td>Eliminar</td>
+                                                    <td>Fecha</td>
+                                                </tr>
+                                            </thead>
                                         </tr>
                                     </thead>
 
-                                        <thead class="thead-dark text-center">
-                                            <tr>
-                                                <th scope="col">Amigos</th>
-                                                <th scope="col">Fecha y hora de la confirmación</th>
-                                                <th scope="col" class="text-center">Editar Contacto</th>
-                                                <th scope="col" class="text-center">Abrir chat</th>
-                                                <th scope="col" class="text-center">Eliminar</th>
-                                            </tr>
-                                        </thead>
 
                                         <tbody>
                                             <?php
@@ -105,11 +137,11 @@
                                                     $usuarioAmigo = $fila['amigo'];
                                                     $fecha = $fila['fecha'];
                                                     echo "<tr>";
-                                                    echo "<td>$usuarioAmigo</td>";
-                                                    echo "<td>$fecha</td>";
-                                                    echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
-                                                    echo "<td class='align-middle text-center'><a href='../CRUD/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
-                                                    echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
+                                                        echo "<td>$usuarioAmigo</td>";
+                                                        echo "<td class='align-middle text-center'><a href='../CRUD/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
+                                                        echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
+                                                        echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
+                                                        echo "<td>$fecha</td>";
                                                     echo "</tr>";
                                                 }
                                                 $count++;
@@ -153,14 +185,28 @@
                                             <img src="../img/gatoLlorando.jpg" alt="Gato Llorando" style="width: 20vw;border-radius: 10px;">
                                         </div>
 
-                                        <div>
-                                            <button type="button" class="btn btn-success">
-                                                <a href="../CRUD/añadir.php" style="color: white; text-decoration: none;">Añadir Amigo</a>
-                                            </button>
+                                        <div class="btn-group" role="group" aria-label="Botones">
+                                            <div>
+                                                <button type="button" class="btn btn-success mr-2">
+                                                    <a href="../CRUD/añadir.php" style="color: white; text-decoration: none;">Añadir</a>
+                                                </button>
+                                            </div>
 
-                                            <button type="button" class="btn btn-danger">
-                                                <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Volver</a>
-                                            </button>
+                                            <div class="dropdown" style="padding-right: 8px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    Solicitudes
+                                                </button>
+
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+
+                                                <button type="button" class="btn btn-danger">
+                                                    <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
+                                                </button>
+                                            </div>                            
                                         </div>
                                     </div>
                                 </div>      
