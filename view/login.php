@@ -24,7 +24,7 @@
                         <p style="display: none; color: red; " id="alertapass">¡La contraseña debe de tener almenos 9 caracteres!</p> <!-- El mensaje de error permanece oculto hasta que detecta que la contraseña es lo suficientemente larga. -->
                     </div>
                     <div class="field">
-                        <input type="submit" name="btnEnviar" class="btn" id="btnEnviar" value="Enviar" disabled>
+                        <input type="submit" name="btnEnviar" class="boton" id="btnEnviar" value="Enviar" disabled>
                     </div>
                     <div class="links">
                         <p>¿No tienes cuenta? <a href="./register.php">Haz clic aquí y crea una cuenta</a></p>

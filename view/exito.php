@@ -145,7 +145,7 @@
                             ?>
                                 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
                                     <div style="background: white; padding: 20px; text-align: center; border-radius: 10px; width: 45vw;">
-                                        <div class="justify-content-center align-items-center" style="margin-bottom: 20px;">
+                                        <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 20px;">
                                             <h2 style="border-bottom: 1px solid grey;">No tienes amigos</h2>
                                         </div>
 

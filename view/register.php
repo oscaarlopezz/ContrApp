@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="field">
-                        <input type="submit" name="btnEnviar" id="btnEnviar" class="btn" value="Enviar" disabled>
+                        <input type="submit" name="btnEnviar" id="btnEnviar" class="boton" value="Enviar" disabled>
                     </div>
 
                     <div class="links">
