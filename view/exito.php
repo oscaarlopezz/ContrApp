@@ -75,7 +75,7 @@
                                                 </button>
                                                 
                                                 <button type="button" class="btn btn-danger">
-                                                    <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Volver</a>
+                                                    <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
                                                 </button>
                                                 
                                             </th>
