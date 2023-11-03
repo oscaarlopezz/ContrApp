@@ -71,7 +71,7 @@
                                             <th colspan="4">¡Bienvenido <?php echo $user ?>! Esta es tu lista de amigos:</th>
                                             <th class="text-right">
                                                 <button type="button" class="btn btn-success">
-                                                    <a href="../acciones/añadir.php" style="color: white; text-decoration: none;">Añadir</a>
+                                                    <a href="../CRUD/añadir.php" style="color: white; text-decoration: none;">Añadir</a>
                                                 </button>
                                                 
                                                 <button type="button" class="btn btn-danger">
@@ -150,7 +150,7 @@
                                         </div>
 
                                         <div style="margin-bottom: 20px;">
-                                            <img src="../img/gatoLlorando.jpg" alt="Gato Llorando" style="width: 20vw;">
+                                            <img src="../img/gatoLlorando.jpg" alt="Gato Llorando" style="width: 20vw;border-radius: 10px;">
                                         </div>
 
                                         <div>
