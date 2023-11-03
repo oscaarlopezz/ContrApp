@@ -40,12 +40,10 @@
                         <input type="submit" name="btnEnviar" class="boton" id="btnEnviar" value="Enviar" disabled>
                     </div>
 
-                    <script src="../js/botonAñadir.js"></script> <!-- Este script valida el formato y si los campos están vacíos -->
+                    <script src="../js/validacionAñadir.js"></script> <!-- Este script valida el formato y si los campos están vacíos -->
                 </form>
 
-                <button type="button" class="botonRojo">
-                        <a href="../view/exito.php" style="color: white; text-decoration: none;">Volver</a>
-                </button>
+                <a href="../view/exito.php" class="botonRojo">Volver</a>
             </div>
         </div>
     </body>

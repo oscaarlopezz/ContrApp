@@ -86,8 +86,7 @@ body
     padding: 0px 10px;
 }
 
-.botonRojo
-{
+.botonRojo {
     height: 35px;
     background: rgb(252, 70, 4);
     border: 0;
@@ -97,10 +96,19 @@ body
     cursor: pointer;
     transition: all .3s;
     margin-top: 10px;
-    padding: 0px 10px;
+    padding: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
+.botonRojo:hover {
+    background-color: rgb(202, 7, 0); /* Cambia el color de fondo cuando se pasa el cursor */
+    color: white;
+    text-decoration: none;
+}
 
 .sumbit
 {
