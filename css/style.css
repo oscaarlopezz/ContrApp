@@ -12,7 +12,26 @@ body {
 }
 .chat {
     width: 50%;
-    height: 10%;
+    height: 300px;
     overflow-y: scroll;
-    /* margin: 10% 30%; */
+    margin: 5% 25%;
+}
+/* .screen {
+    height: 100%;
+    width: 50%;
+    margin: 0 25%;
+}
+.chat {
+    width: 80%;
+    height: 400px;
+    overflow-y: scroll;
+}
+.chat div {
+    height: 175px;
+}
+*/
+#enviarM {
+    height: 100px;
+    width: 50%;
+    margin: 0 25%;
 }
