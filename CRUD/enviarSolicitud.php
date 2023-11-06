@@ -23,7 +23,7 @@
         <div class="container">
             <div class="box form-box">
                 <header>¡Hey, <?php echo $user ?>! ¿A quién agregas?</header>
-                <form action="../procesos//proc_añadir.php" method="post">
+                <form action="../procesos/proc_enviarSolicitud.php" method="post">
                     <div class="field input">
                         <label for="user">Nombre de usuario:</label>
                         <input type="text" name="user" id="user">

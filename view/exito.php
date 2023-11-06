@@ -53,290 +53,301 @@
             if (mysqli_num_rows($resultados) > 0) 
             {
         ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered" style="background: #FFFF;">
-                            <thead class="thead-dark text-center">
-                                <tr>
-                                    <th colspan="4">¡Bienvenido <?php echo $user ?>! Esta es tu lista de amigos:</th>
-                                    <th class="text-right">
-                                        <div class="btn-group" role="group" aria-label="Botones">
-                                            <div>
-                                                <button type="button" class="btn btn-success mr-2">
-                                                    <a href="../CRUD/añadir.php" style="color: white; text-decoration: none;">Añadir</a>
-                                                </button>
-                                            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" style="background: #FFFF;">
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th colspan="4">¡Bienvenido <?php echo $user ?>! Esta es tu lista de amigos:</th>
+                            <th class="text-right">
+                                <div class="btn-group" role="group" aria-label="Botones">
+                                    <div>
+                                        <button type="button" class="btn btn-success mr-2">
+                                            <a href="../CRUD/enviarSolicitud.php" style="color: white; text-decoration: none;">Añadir</a>
+                                        </button>
+                                    </div>
 
-                                            <div class="dropdown" style="padding-right: 8px;">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                                    Solicitudes
-                                                </button>
+                                    <div class="dropdown" style="padding-right: 8px;">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                            Solicitudes
+                                        </button>
 
-                                                <div class="dropdown-menu">
-                                                    <?php
-                                                    $sqlIdUsuarioEmisor = "SELECT id FROM usuarios WHERE username = ?";
-                                                    $stmtIdUsuarioEmisor = mysqli_prepare($conn, $sqlIdUsuarioEmisor);
+                                        <div class="dropdown-menu">
+                                            <?php
+                                            $sqlIdUsuarioEmisor = "SELECT id FROM usuarios WHERE username = ?";
+                                            $stmtIdUsuarioEmisor = mysqli_prepare($conn, $sqlIdUsuarioEmisor);
 
-                                                    if ($stmtIdUsuarioEmisor) 
+                                            if ($stmtIdUsuarioEmisor) 
+                                            {
+                                                // Vincula el valor del nombre de usuario al marcador de posición en la consulta
+                                                mysqli_stmt_bind_param($stmtIdUsuarioEmisor, "s", $user);
+
+                                                // Ejecuta la consulta
+                                                if (mysqli_stmt_execute($stmtIdUsuarioEmisor)) 
+                                                {
+                                                    // Obtén el resultado de la consulta
+                                                    mysqli_stmt_bind_result($stmtIdUsuarioEmisor, $idEmisor);
+
+                                                    // Recupera el valor del ID del usuario emisor
+                                                    mysqli_stmt_fetch($stmtIdUsuarioEmisor);
+
+                                                    // Cierra la declaración preparada
+                                                    mysqli_stmt_close($stmtIdUsuarioEmisor);
+                                                } 
+                                                else 
+                                                {
+                                                    echo "Error al ejecutar la consulta: " . mysqli_error($conn);
+                                                }
+                                            }
+
+                                            // Consulta SQL para obtener las solicitudes de amistad
+                                            $sqlVerSolicitud = "SELECT u.username AS emisor
+                                                FROM solicitudes s
+                                                INNER JOIN usuarios u ON s.emisor = u.id
+                                                WHERE s.receptor = ?";
+
+                                            $stmtVerSolicitud = mysqli_prepare($conn, $sqlVerSolicitud);
+
+                                            if ($stmtVerSolicitud) 
+                                            {
+                                                // Vincula el valor del ID del receptor al marcador de posición en la consulta
+                                                mysqli_stmt_bind_param($stmtVerSolicitud, "i", $resultadoIdUser);
+
+                                                // Ejecuta la consulta
+                                                if (mysqli_stmt_execute($stmtVerSolicitud)) 
+                                                {
+                                                    // Obtén el resultado de la consulta
+                                                    mysqli_stmt_bind_result($stmtVerSolicitud, $nombreEmisor);
+
+                                                    // Comprueba si hay resultados
+                                                    if (mysqli_stmt_fetch($stmtVerSolicitud)) 
                                                     {
-                                                        // Vincula el valor del nombre de usuario al marcador de posición en la consulta
-                                                        mysqli_stmt_bind_param($stmtIdUsuarioEmisor, "s", $user);
+                                                        // Mostrar los resultados aquí
+                                                        echo "<form method='post' action='../CRUD/aceptarSolicitud.php'>";
 
-                                                        // Ejecuta la consulta
-                                                        if (mysqli_stmt_execute($stmtIdUsuarioEmisor)) 
-                                                        {
-                                                            // Obtén el resultado de la consulta
-                                                            mysqli_stmt_bind_result($stmtIdUsuarioEmisor, $idEmisor);
-
-                                                            // Recupera el valor del ID del usuario emisor
-                                                            mysqli_stmt_fetch($stmtIdUsuarioEmisor);
-
-                                                            // Cierra la declaración preparada
-                                                            mysqli_stmt_close($stmtIdUsuarioEmisor);
-                                                        } 
-                                                        else 
-                                                        {
-                                                            echo "Error al ejecutar la consulta: " . mysqli_error($conn);
-                                                        }
-                                                    }
-
-                                                    // Consulta SQL para obtener las solicitudes de amistad
-                                                    $sqlVerSolicitud = "SELECT u.username AS emisor
-                                                        FROM solicitudes s
-                                                        INNER JOIN usuarios u ON s.emisor = u.id
-                                                        WHERE s.receptor = ?";
-
-                                                    $stmtVerSolicitud = mysqli_prepare($conn, $sqlVerSolicitud);
-
-                                                    if ($stmtVerSolicitud) 
-                                                    {
-                                                        // Vincula el valor del ID del receptor al marcador de posición en la consulta
-                                                        mysqli_stmt_bind_param($stmtVerSolicitud, "i", $resultadoIdUser);
-
-                                                        // Ejecuta la consulta
-                                                        if (mysqli_stmt_execute($stmtVerSolicitud)) 
-                                                        {
-                                                            // Obtén el resultado de la consulta
-                                                            mysqli_stmt_bind_result($stmtVerSolicitud, $nombreEmisor);
-
-                                                            // Comprueba si hay resultados
-                                                            if (mysqli_stmt_fetch($stmtVerSolicitud)) 
-                                                            {
-                                                                // Mostrar los resultados aquí
-                                                                do 
-                                                                {
-                                                                    // Procesa y muestra las solicitudes
-                                                                    echo "<p class='dropdown-item'>Solicitud de: " . $nombreEmisor . "</p>";
-                                                                } while (mysqli_stmt_fetch($stmtVerSolicitud));
-                                                            } 
-                                                            else 
-                                                            {
-                                                                // Si no hay resultados, muestra el mensaje "No hay solicitudes nuevas"
-                                                                echo "<p class='dropdown-item'>No hay solicitudes nuevas</p>";
-                                                            }
-
-                                                            // Cierra la declaración preparada
-                                                            mysqli_stmt_close($stmtVerSolicitud);
-                                                        } 
-                                                        else 
-                                                        {
-                                                            echo "Error al ejecutar la consulta: " . mysqli_error($conn);
-                                                        }
+                                                        do {
+                                                            // Procesa y muestra las solicitudes
+                                                            echo "<input type='checkbox' name='solicitudes[]' value='$nombreEmisor'>Solicitud de: $nombreEmisor</input><br>";
+                                                        } while (mysqli_stmt_fetch($stmtVerSolicitud));
+                                                        
+                                                        // Coloca el botón fuera del bucle
+                                                        echo "<input type='submit' name='enviar'>";
+                                                        echo "</form>";
                                                     } 
+                                                    
                                                     else 
                                                     {
-                                                        echo "Error en la preparación de la consulta: " . mysqli_error($conn);
+                                                        // Si no hay resultados, muestra el mensaje "No hay solicitudes nuevas"
+                                                        echo "<p class='dropdown-item'>No hay solicitudes nuevas</p>";
                                                     }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                            
-                                            <div>
-                                                <button type="button" class="btn btn-danger mr-2">
-                                                    <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
-                                                </button>
-                                            </div>
+
+                                                    // Cierra la declaración preparada
+                                                    mysqli_stmt_close($stmtVerSolicitud);
+                                                } 
+                                                else 
+                                                {
+                                                    echo "Error al ejecutar la consulta: " . mysqli_error($conn);
+                                                }
+                                            } 
+                                            else 
+                                            {
+                                                echo "Error en la preparación de la consulta: " . mysqli_error($conn);
+                                            }
+                                            ?>
                                         </div>
-                                    </th>
-                                </tr>
-                            </thead>
+                                    </div>
+                                    
+                                    <div>
+                                        <button type="button" class="btn btn-danger mr-2">
+                                            <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
 
-                            <thead>
-                                <tr>
-                                    <td>Nombre del Amigo</td>
-                                    <td>Abrir chat</td>
-                                    <td>Editar</td>
-                                    <td>Eliminar</td>
-                                    <td>Fecha</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $numPerPage = 5;
-                                $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                                $start = ($currentPage - 1) * $numPerPage;
-                                $end = $start + $numPerPage;
-                                $count = 0;
-
-                                while ($fila = mysqli_fetch_assoc($resultados)) 
-                                {
-                                    if ($count >= $start && $count < $end) 
-                                    {
-                                        $usuarioAmigo = $fila['amigo'];
-                                        $fecha = $fila['fecha'];
-                                        echo "<tr>";
-                                        echo "<td>$usuarioAmigo</td>";
-                                        echo "<td class='align-middle text-center'><a href='../CRUD/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
-                                        echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
-                                        echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
-                                        echo "<td>$fecha</td>";
-                                        echo "</tr>";
-                                    }
-                                    $count++;
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center pagination-container">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
+                    <thead>
+                        <tr>
+                            <td>Nombre del Amigo</td>
+                            <td>Abrir chat</td>
+                            <td>Editar</td>
+                            <td>Eliminar</td>
+                            <td>Fecha</td>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                        $totalPages = ceil($count / $numPerPage);
-                        for ($i = 1; $i <= $totalPages; $i++) 
+                        $numPerPage = 5;
+                        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                        $start = ($currentPage - 1) * $numPerPage;
+                        $end = $start + $numPerPage;
+                        $count = 0;
+
+                        while ($fila = mysqli_fetch_assoc($resultados)) 
                         {
-                            echo "<li style='margin-right: 5px;' class='page-item " . ($i == $currentPage ? 'active' : '') . "'>";
-                            echo "<a class='page-link' href='?page=$i'>$i</a>";
-                            echo "</li>";
+                            if ($count >= $start && $count < $end) 
+                            {
+                                $usuarioAmigo = $fila['amigo'];
+                                $fecha = $fila['fecha'];
+                                echo "<tr>";
+                                echo "<td>$usuarioAmigo</td>";
+                                echo "<td class='align-middle text-center'><a href='../CRUD/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
+                                echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
+                                echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
+                                echo "<td>$fecha</td>";
+                                echo "</tr>";
+                            }
+                            $count++;
                         }
                         ?>
-                    </ul>
-                </nav>
+                    </tbody>
+                </table>
             </div>
-        <?php
-        } 
-        
-        else {
-        ?>
-            <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-                <div style="background: white; padding: 20px; text-align: center; border-radius: 10px; width: 45vw;">
-                    <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 20px;">
-                        <h2 style="border-bottom: 1px solid grey;"><?php echo $_SESSION['user'] ?>, no tienes amigos</h2>
-                    </div>
+        </div>
+    </div>
 
-                    <div style="margin-bottom: 20px;">
-                        <img src="../img/gatoLlorando.jpg" alt="Gato Llorando" style="width: 20vw; border-radius: 10px;">
-                    </div>
+    <div class="text-center pagination-container">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <?php
+                $totalPages = ceil($count / $numPerPage);
+                for ($i = 1; $i <= $totalPages; $i++) 
+                {
+                    echo "<li style='margin-right: 5px;' class='page-item " . ($i == $currentPage ? 'active' : '') . "'>";
+                    echo "<a class='page-link' href='?page=$i'>$i</a>";
+                    echo "</li>";
+                }
+                ?>
+            </ul>
+        </nav>
+    </div>
+<?php
+} 
 
-                    <div class="btn-group" role="group" aria-label="Botones">
-                        <div>
-                            <button type="button" class="btn btn-success mr-2">
-                                <a href="../CRUD/añadir.php" style="color: white; text-decoration: none;">Añadir</a>
-                            </button>
-                        </div>
+else {
+?>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div style="background: white; padding: 20px; text-align: center; border-radius: 10px; width: 45vw;">
+            <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 20px;">
+                <h2 style="border-bottom: 1px solid grey;"><?php echo $_SESSION['user'] ?>, no tienes amigos</h2>
+            </div>
 
-                        <div class="dropdown" style="padding-right: 8px;">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                Solicitudes
-                            </button>
+            <div style="margin-bottom: 20px;">
+                <img src="../img/gatoLlorando.jpg" alt="Gato Llorando" style="width: 20vw; border-radius: 10px;">
+            </div>
 
-                            <div class="dropdown-menu">
-                                <?php
-                                $sqlIdUsuarioEmisor = "SELECT id FROM usuarios WHERE username = ?";
-                                $stmtIdUsuarioEmisor = mysqli_prepare($conn, $sqlIdUsuarioEmisor);
+            <div class="btn-group" role="group" aria-label="Botones">
+                <div>
+                    <button type="button" class="btn btn-success mr-2">
+                        <a href="../CRUD/enviarSolicitud.php" style="color: white; text-decoration: none;">Añadir</a>
+                    </button>
+                </div>
 
-                                if ($stmtIdUsuarioEmisor) 
+                <div class="dropdown" style="padding-right: 8px;">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                        Solicitudes
+                    </button>
+
+                    <div class="dropdown-menu">
+                        <?php
+                        $sqlIdUsuarioEmisor = "SELECT id FROM usuarios WHERE username = ?";
+                        $stmtIdUsuarioEmisor = mysqli_prepare($conn, $sqlIdUsuarioEmisor);
+
+                        if ($stmtIdUsuarioEmisor) 
+                        {
+                            // Vincula el valor del nombre de usuario al marcador de posición en la consulta
+                            mysqli_stmt_bind_param($stmtIdUsuarioEmisor, "s", $user);
+
+                            // Ejecuta la consulta
+                            if (mysqli_stmt_execute($stmtIdUsuarioEmisor)) 
+                            {
+                                // Obtén el resultado de la consulta
+                                mysqli_stmt_bind_result($stmtIdUsuarioEmisor, $idEmisor);
+
+                                // Recupera el valor del ID del usuario emisor
+                                mysqli_stmt_fetch($stmtIdUsuarioEmisor);
+
+                                // Cierra la declaración preparada
+                                mysqli_stmt_close($stmtIdUsuarioEmisor);
+                            } 
+                            else 
+                            {
+                                echo "Error al ejecutar la consulta: " . mysqli_error($conn);
+                            }
+                        }
+
+                        // Consulta SQL para obtener las solicitudes de amistad
+                        $sqlVerSolicitud = "SELECT u.username AS emisor
+                            FROM solicitudes s
+                            INNER JOIN usuarios u ON s.emisor = u.id
+                            WHERE s.receptor = ?";
+
+                        $stmtVerSolicitud = mysqli_prepare($conn, $sqlVerSolicitud);
+
+                        if ($stmtVerSolicitud) 
+                        {
+                            // Vincula el valor del ID del receptor al marcador de posición en la consulta
+                            mysqli_stmt_bind_param($stmtVerSolicitud, "i", $resultadoIdUser);
+
+                            // Ejecuta la consulta
+                            if (mysqli_stmt_execute($stmtVerSolicitud)) 
+                            {
+                                // Obtén el resultado de la consulta
+                                mysqli_stmt_bind_result($stmtVerSolicitud, $nombreEmisor);
+
+                                // Comprueba si hay resultados
+                                if (mysqli_stmt_fetch($stmtVerSolicitud)) 
                                 {
-                                    // Vincula el valor del nombre de usuario al marcador de posición en la consulta
-                                    mysqli_stmt_bind_param($stmtIdUsuarioEmisor, "s", $user);
+                                    // Mostrar los resultados aquí
+                                    echo "<form method='post' action='../CRUD/aceptarSolicitud.php'>";
 
-                                    // Ejecuta la consulta
-                                    if (mysqli_stmt_execute($stmtIdUsuarioEmisor)) 
-                                    {
-                                        // Obtén el resultado de la consulta
-                                        mysqli_stmt_bind_result($stmtIdUsuarioEmisor, $idEmisor);
-
-                                        // Recupera el valor del ID del usuario emisor
-                                        mysqli_stmt_fetch($stmtIdUsuarioEmisor);
-
-                                        // Cierra la declaración preparada
-                                        mysqli_stmt_close($stmtIdUsuarioEmisor);
-                                    } 
-                                    else 
-                                    {
-                                        echo "Error al ejecutar la consulta: " . mysqli_error($conn);
-                                    }
-                                }
-
-                                // Consulta SQL para obtener las solicitudes de amistad
-                                $sqlVerSolicitud = "SELECT u.username AS emisor
-                                    FROM solicitudes s
-                                    INNER JOIN usuarios u ON s.emisor = u.id
-                                    WHERE s.receptor = ?";
-
-                                $stmtVerSolicitud = mysqli_prepare($conn, $sqlVerSolicitud);
-
-                                if ($stmtVerSolicitud) 
-                                {
-                                    // Vincula el valor del ID del receptor al marcador de posición en la consulta
-                                    mysqli_stmt_bind_param($stmtVerSolicitud, "i", $resultadoIdUser);
-
-                                    // Ejecuta la consulta
-                                    if (mysqli_stmt_execute($stmtVerSolicitud)) 
-                                    {
-                                        // Obtén el resultado de la consulta
-                                        mysqli_stmt_bind_result($stmtVerSolicitud, $nombreEmisor);
-
-                                        // Comprueba si hay resultados
-                                        if (mysqli_stmt_fetch($stmtVerSolicitud)) 
-                                        {
-                                            // Mostrar los resultados aquí
-                                            do 
-                                            {
-                                                // Procesa y muestra las solicitudes
-                                                echo "<p class='dropdown-item'>Solicitud de: " . $nombreEmisor . "</p>";
-                                            } while (mysqli_stmt_fetch($stmtVerSolicitud));
-                                        } 
-                                        else 
-                                        {
-                                            // Si no hay resultados, muestra el mensaje "No hay solicitudes nuevas"
-                                            echo "<p class='dropdown-item'>No hay solicitudes nuevas</p>";
-                                        }
-
-                                        // Cierra la declaración preparada
-                                        mysqli_stmt_close($stmtVerSolicitud);
-                                    } 
-                                    else 
-                                    {
-                                        echo "Error al ejecutar la consulta: " . mysqli_error($conn);
-                                    }
+                                    do {
+                                        // Procesa y muestra las solicitudes
+                                        echo "<input type='checkbox' name='solicitudes[]' value='$nombreEmisor'>Solicitud de: $nombreEmisor</input><br>";
+                                    } while (mysqli_stmt_fetch($stmtVerSolicitud));
+                                    
+                                    // Coloca el botón fuera del bucle
+                                    echo "<input type='submit' name='enviar'>";
+                                    echo "</form>";
                                 } 
                                 else 
                                 {
-                                    echo "Error en la preparación de la consulta: " . mysqli_error($conn);
+                                    // Si no hay resultados, muestra el mensaje "No hay solicitudes nuevas"
+                                    echo "<p class='dropdown-item'>No hay solicitudes nuevas</p>";
                                 }
-                                ?>
-                            </div>
-                        </div>
 
-                        <button type="button" class="btn btn-danger">
-                            <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
-                        </button>
-                        </div>
+                                // Cierra la declaración preparada
+                                mysqli_stmt_close($stmtVerSolicitud);
+                            } 
+                            else 
+                            {
+                                echo "Error al ejecutar la consulta: " . mysqli_error($conn);
+                            }
+                        } 
+                        else 
+                        {
+                            echo "Error en la preparación de la consulta: " . mysqli_error($conn);
+                        }
+                        ?>
                     </div>
                 </div>
-            </div>        
-            <?php
-        }
-        mysqli_stmt_close($stmtBuscarAmigos);
-        mysqli_close($conn);
-        }
-        }
-        ?>
-    </div>
+
+                <button type="button" class="btn btn-danger">
+                    <a href="../acciones/cerrar_sesion.php" style="color: white; text-decoration: none;">Salir</a>
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>        
+        <?php
+    }
+    mysqli_stmt_close($stmtBuscarAmigos);
+    mysqli_close($conn);
+    }
+    }
+    ?>
+</div>
 </body>
 </html>
