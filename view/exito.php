@@ -41,12 +41,12 @@
             mysqli_stmt_close($stmtIdUser);
         }
 
-        $consultaBuscarAmigos = "SELECT u.username as amigo, a.FechaConfirmacion as fecha FROM amistades a INNER JOIN usuarios u ON a.usuario_2 = u.id WHERE a.usuario_1 = ?";
+        $consultaBuscarAmigos = "SELECT u.id as id, u.username as amigo, a.FechaConfirmacion as fecha FROM amistades a INNER JOIN usuarios u ON a.usuario_1 = u.id OR a.usuario_2 = u.id WHERE (a.usuario_1 = ? OR a.usuario_2 = ?) AND u.id <> ?;";
         $stmtBuscarAmigos = mysqli_stmt_init($conn);
 
         if (mysqli_stmt_prepare($stmtBuscarAmigos, $consultaBuscarAmigos)) 
         {
-            mysqli_stmt_bind_param($stmtBuscarAmigos, "i", $resultadoIdUser);
+            mysqli_stmt_bind_param($stmtBuscarAmigos, "iii", $resultadoIdUser, $resultadoIdUser, $resultadoIdUser);
             mysqli_stmt_execute($stmtBuscarAmigos);
             $resultados = mysqli_stmt_get_result($stmtBuscarAmigos);
 
@@ -189,7 +189,7 @@
                                         echo "<td>$usuarioAmigo</td>";
                                         echo "<td class='align-middle text-center'><a href='../CRUD/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
                                         echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
-                                        echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
+                                        echo "<td class='align-middle text-center'>" ?> <a href='../CRUD/eliminar.php?amigo=<?php echo $fila['id']; ?>' onclick="return confirm('¿Estás seguro de que quieres eliminar a <?php echo $fila['amigo']; ?> de tu lista de amigos?')"><i class='fas fa-trash-alt'></i></td> <?php ;
                                         echo "<td>$fecha</td>";
                                         echo "</tr>";
                                     }

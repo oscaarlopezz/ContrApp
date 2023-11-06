@@ -1,5 +1,5 @@
 <?php
-include_once('../procesos/conexion.php');
+include_once('../herramientas/conexion.php');
 
 // Recuperar los datos enviados a través de POST
 $id_user2 = $_POST['id_user'];
@@ -7,7 +7,7 @@ $receptor2 = $_POST['receptor'];
 $id_user = intval($id_user2);
 $receptor = intval($receptor2);
 
-// echo gettype($id_user); // Esto mostrará "integer"
+// echo gettype($id_user); // Esto mostrará "integer" osea el tipo de datos que en este caso es numeral
 
 // echo gettype($receptor); // Esto mostrará "integer"
 

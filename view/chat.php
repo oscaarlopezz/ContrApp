@@ -46,7 +46,14 @@ function fetchMessages() {
 // Llamar a fetchMessages al cargar la página por primera vez
 document.addEventListener("DOMContentLoaded", fetchMessages);
 
+  // Obtén el elemento input por su ID
+  const inputMensaje = document.getElementById('mensaje');
 
+  // Agrega un event listener para el evento 'input'
+  inputMensaje.addEventListener('input', function() {
+    // Cuando el input cambie, ejecuta la función fetchMessages
+    fetchMessages();
+  });
     
 
     function Enviar() {
