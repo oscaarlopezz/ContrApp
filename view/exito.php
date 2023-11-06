@@ -187,11 +187,29 @@
                                         $fecha = $fila['fecha'];
                                         echo "<tr>";
                                         echo "<td>$usuarioAmigo</td>";
-                                        echo "<td class='align-middle text-center'><a href='../CRUD/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
-                                        echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
-                                        echo "<td class='align-middle text-center'>" ?> <a href='../CRUD/eliminar.php?amigo=<?php echo $fila['id']; ?>' onclick="return confirm('¿Estás seguro de que quieres eliminar a <?php echo $fila['amigo']; ?> de tu lista de amigos?')"><i class='fas fa-trash-alt'></i></td> <?php ;
-                                        echo "<td>$fecha</td>";
-                                        echo "</tr>";
+                                        echo "<td class='align-middle text-center'>
+                                        <form method='POST' action='../view/chat.php'>
+                                          <input type='hidden' name='user' value='" . $resultadoIdUser . "'>
+                                          <input type='hidden' name='amigo' value='" . $fila['id'] . "'>
+                                          <button type='submit'>
+                                            <i class='fas fa-paper-plane'></i>
+                                          </button>
+                                        </form>
+                                      </td>
+                                      ";
+                                        echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>"; ?>
+                                        <td class='align-middle text-center'>
+                                        <form method="POST" action="../CRUD/eliminar.php">
+                                          <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>">
+                                          <input type="hidden" name="user" value="<?php echo $resultadoIdUser; ?>">
+                                          <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar a <?php echo $fila['amigo']; ?> de tu lista de amigos?')">
+                                            <i class='fas fa-trash-alt'></i>
+                                          </button>
+                                        </form>
+                                      </td>
+                                      <td><?php echo $fecha; ?></td>
+                                      </tr>
+                                      <?php
                                     }
                                     $count++;
                                 }

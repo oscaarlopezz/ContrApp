@@ -1,3 +1,20 @@
+<?php
+// Inicia la sesión
+session_start();
+
+// Comprueba si los valores están presentes en la URL y configúralos en las variables de sesión
+if (isset($_POST['user'])) {
+    $_SESSION['id_user'] = $_POST['user'];
+}
+
+if (isset($_POST['amigo'])) {
+    $_SESSION['receptor'] = $_POST['amigo'];
+}
+
+// Ahora puedes acceder a estos valores en cualquier lugar del script o en otras páginas
+$id_user = $_SESSION['id_user'];
+$receptor = $_SESSION['receptor'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +25,6 @@
 </head>
 <body>
     <?php
-$id_user = 1;
-        $receptor = 2;
             // include_once('../procesos/conexion.php');
             ?>
     <div class="chat" id="chat-container">
@@ -38,7 +53,7 @@ function fetchMessages() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     
     // Define los datos que deseas enviar en el cuerpo de la solicitud
-    const data = `id_user=${id_user}&receptor=${receptor}`;
+    const data = `user=${id_user}&amigo=${receptor}`;
     
     xhr.send(data);
 }
