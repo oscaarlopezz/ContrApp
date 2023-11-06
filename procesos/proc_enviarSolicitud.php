@@ -31,27 +31,40 @@ if ($resultadoIdSesion)
             {                
                 $idSesion = mysqli_fetch_assoc($resultadoIdSesion)['id'];
                 $idNuevoUsuario = mysqli_fetch_assoc($resultadoIdUserPost)['id'];
-                
-                $consultaSolicitudes = "SELECT id FROM solicitudes WHERE emisor = '$idSesion' AND receptor = '$idNuevoUsuario'";
-                $resultadoSolicitudes = mysqli_query($conn, $consultaSolicitudes);
 
-                if (mysqli_num_rows($resultadoSolicitudes) > 0) 
+                // Comprueba si ya existe una relación en la tabla 'amistades' con ambos IDs
+                $consultaAmistades = "SELECT id FROM amistades WHERE (usuario_1 = '$idSesion' AND usuario_2 = '$idNuevoUsuario') OR (usuario_1 = '$idNuevoUsuario' AND usuario_2 = '$idSesion')";
+                $resultadoAmistades = mysqli_query($conn, $consultaAmistades);
+
+                if (mysqli_num_rows($resultadoAmistades) > 0) 
                 {
-                    header('Location: ../CRUD/enviarSolicitud.php?solicitudExiste');
+                    // Redirige con un mensaje de error, ya son amigos
+                    header('Location: ../CRUD/enviarSolicitud.php?yaSonAmigos');
                 }
                 else 
                 {
-                    $insertarSolicitudes = "INSERT INTO solicitudes (emisor, receptor) VALUES ('$idSesion', '$idNuevoUsuario')";
-                    $resultadoInsertarSolicitudes = mysqli_query($conn, $insertarSolicitudes);
-            
-                    if ($resultadoInsertarSolicitudes) 
+                    // Continúa con el código para insertar la solicitud
+                    $consultaSolicitudes = "SELECT id FROM solicitudes WHERE emisor = '$idSesion' AND receptor = '$idNuevoUsuario'";
+                    $resultadoSolicitudes = mysqli_query($conn, $consultaSolicitudes);
+
+                    if (mysqli_num_rows($resultadoSolicitudes) > 0) 
                     {
-                        header('Location'.'../view/exito.php?solicitudEnviada');
+                        header('Location: ../CRUD/enviarSolicitud.php?solicitudExiste');
                     }
                     else 
                     {
-                        header('Location'.'../view/exito.php?solicitudNoEnviada');
-                    }            
+                        $insertarSolicitudes = "INSERT INTO solicitudes (emisor, receptor) VALUES ('$idSesion', '$idNuevoUsuario')";
+                        $resultadoInsertarSolicitudes = mysqli_query($conn, $insertarSolicitudes);
+                
+                        if ($resultadoInsertarSolicitudes) 
+                        {
+                            header('Location'.'../view/exito.php?solicitudEnviada');
+                        }
+                        else 
+                        {
+                            header('Location'.'../view/exito.php?solicitudNoEnviada');
+                        }            
+                    }
                 }
             }
             else 
