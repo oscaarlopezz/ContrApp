@@ -30,7 +30,7 @@ function fetchMessages() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             chatContainer.innerHTML = xhr.responseText; // Actualizar solo el contenido de chat-container
-            setInterval(fetchMessages, 5000); // Cambia el intervalo según tus necesidades
+            // setInterval(fetchMessages, 5000); // Cambia el intervalo según tus necesidades
         }
     };
 
