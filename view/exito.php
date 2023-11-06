@@ -41,12 +41,12 @@
             mysqli_stmt_close($stmtIdUser);
         }
 
-        $consultaBuscarAmigos = "SELECT u.username as amigo, a.FechaConfirmacion as fecha FROM amistades a INNER JOIN usuarios u ON a.usuario_2 = u.id WHERE a.usuario_1 = ?";
+        $consultaBuscarAmigos = "SELECT u.id as id, u.username as amigo, a.FechaConfirmacion as fecha FROM amistades a INNER JOIN usuarios u ON a.usuario_1 = u.id OR a.usuario_2 = u.id WHERE (a.usuario_1 = ? OR a.usuario_2 = ?) AND u.id <> ?;";
         $stmtBuscarAmigos = mysqli_stmt_init($conn);
 
         if (mysqli_stmt_prepare($stmtBuscarAmigos, $consultaBuscarAmigos)) 
         {
-            mysqli_stmt_bind_param($stmtBuscarAmigos, "i", $resultadoIdUser);
+            mysqli_stmt_bind_param($stmtBuscarAmigos, "iii", $resultadoIdUser, $resultadoIdUser, $resultadoIdUser);
             mysqli_stmt_execute($stmtBuscarAmigos);
             $resultados = mysqli_stmt_get_result($stmtBuscarAmigos);
 
@@ -168,6 +168,7 @@
                         </tr>
                     </thead>
 
+<<<<<<< HEAD
                     <thead>
                         <tr>
                             <td>Nombre del Amigo</td>
@@ -178,6 +179,69 @@
                         </tr>
                     </thead>
                     <tbody>
+=======
+                            <thead>
+                                <tr>
+                                    <td>Nombre del Amigo</td>
+                                    <td>Abrir chat</td>
+                                    <td>Editar</td>
+                                    <td>Eliminar</td>
+                                    <td>Fecha</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $numPerPage = 5;
+                                $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                                $start = ($currentPage - 1) * $numPerPage;
+                                $end = $start + $numPerPage;
+                                $count = 0;
+
+                                while ($fila = mysqli_fetch_assoc($resultados)) 
+                                {
+                                    if ($count >= $start && $count < $end) 
+                                    {
+                                        $usuarioAmigo = $fila['amigo'];
+                                        $fecha = $fila['fecha'];
+                                        echo "<tr>";
+                                        echo "<td>$usuarioAmigo</td>";
+                                        echo "<td class='align-middle text-center'>
+                                        <form method='POST' action='../view/chat.php'>
+                                          <input type='hidden' name='user' value='" . $resultadoIdUser . "'>
+                                          <input type='hidden' name='amigo' value='" . $fila['id'] . "'>
+                                          <button type='submit'>
+                                            <i class='fas fa-paper-plane'></i>
+                                          </button>
+                                        </form>
+                                      </td>
+                                      ";
+                                        echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>"; ?>
+                                        <td class='align-middle text-center'>
+                                        <form method="POST" action="../CRUD/eliminar.php">
+                                          <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>">
+                                          <input type="hidden" name="user" value="<?php echo $resultadoIdUser; ?>">
+                                          <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar a <?php echo $fila['amigo']; ?> de tu lista de amigos?')">
+                                            <i class='fas fa-trash-alt'></i>
+                                          </button>
+                                        </form>
+                                      </td>
+                                      <td><?php echo $fecha; ?></td>
+                                      </tr>
+                                      <?php
+                                    }
+                                    $count++;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pagination-container">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+>>>>>>> e6db8d6ca32792fd4301ae4757ab06547a37e3b1
                         <?php
                         $numPerPage = 5;
                         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
