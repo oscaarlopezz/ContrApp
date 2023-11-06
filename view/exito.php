@@ -189,7 +189,7 @@
                                 $fecha = $fila['fecha'];
                                 echo "<tr>";
                                 echo "<td>$usuarioAmigo</td>";
-                                echo "<td class='align-middle text-center'><a href='../CRUD/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
+                                echo "<td class='align-middle text-center'><a href='../view/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
                                 echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
                                 echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
                                 echo "<td>$fecha</td>";
