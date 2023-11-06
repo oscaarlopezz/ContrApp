@@ -168,18 +168,6 @@
                         </tr>
                     </thead>
 
-<<<<<<< HEAD
-                    <thead>
-                        <tr>
-                            <td>Nombre del Amigo</td>
-                            <td>Abrir chat</td>
-                            <td>Editar</td>
-                            <td>Eliminar</td>
-                            <td>Fecha</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-=======
                             <thead>
                                 <tr>
                                     <td>Nombre del Amigo</td>
@@ -241,7 +229,6 @@
             <div class="text-center pagination-container">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
->>>>>>> e6db8d6ca32792fd4301ae4757ab06547a37e3b1
                         <?php
                         $numPerPage = 5;
                         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;

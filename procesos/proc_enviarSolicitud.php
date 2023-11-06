@@ -46,11 +46,11 @@ if ($resultadoIdSesion)
             
                     if ($resultadoInsertarSolicitudes) 
                     {
-                        echo "Se ha insertado";
+                        header('Location'.'../view/exito.php?solicitudEnviada');
                     }
                     else 
                     {
-                        echo "No se ha insertado";
+                        header('Location'.'../view/exito.php?solicitudNoEnviada');
                     }            
                 }
             }
