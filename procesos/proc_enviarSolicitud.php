@@ -51,6 +51,7 @@ if ($resultadoIdSesion)
                     {
                         header('Location: ../CRUD/enviarSolicitud.php?solicitudExiste');
                     }
+
                     else 
                     {
                         $insertarSolicitudes = "INSERT INTO solicitudes (emisor, receptor) VALUES ('$idSesion', '$idNuevoUsuario')";
@@ -58,11 +59,11 @@ if ($resultadoIdSesion)
                 
                         if ($resultadoInsertarSolicitudes) 
                         {
-                            header('Location'.'../view/exito.php?solicitudEnviada');
+                            header('Location:'.'../view/exito.php?solicitudEnviada');
                         }
                         else 
                         {
-                            header('Location'.'../view/exito.php?solicitudNoEnviada');
+                            header('Location:'.'../view/exito.php?solicitudNoEnviada');
                         }            
                     }
                 }
@@ -70,7 +71,7 @@ if ($resultadoIdSesion)
             else 
             {
                 // Si el usuario con el nombre proporcionado no existe, puedes redirigir al usuario a la página deseada
-                header('Location: ../CRUD/enviarSolicitud.php?usuarioNoExiste');
+                header('Location: ../view/exito.php');
                 exit; // Asegura que el script se detiene después de redirigir
             }
         }

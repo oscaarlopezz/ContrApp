@@ -125,12 +125,12 @@
                                                     {
                                                         // Mostrar los resultados aquí
                                                         ?>
-                                                            <form action="../CRUD/aceptarSolicitud.php" method="post">
+                                                            <form action="../CRUD/aceptarSolicitud.php" method="POST">
                                                                 <?php
                                                                 do {
                                                                     // Procesa y muestra las solicitudes
                                                                     echo '<label class="checkbox-label">';
-                                                                    echo "<input type='checkbox' class='checkbox-input'>Solicitud de: " . $nombreEmisor;
+                                                                    echo '<input type="checkbox" class="checkbox-input" name="soli" id="soli">Solicitud de: ' . $nombreEmisor;
                                                                     echo '</label>';
                                                                 } while (mysqli_stmt_fetch($stmtVerSolicitud));
                                                                 ?>
@@ -305,12 +305,12 @@ else {
                                 {
                                     // Mostrar los resultados aquí
                                     ?>
-                                        <form action="../CRUD/aceptarSolicitud.php" method="post">
+                                        <form action="../CRUD/aceptarSolicitud.php" method="POST">
                                             <?php
                                             do {
                                                 // Procesa y muestra las solicitudes
                                                 echo '<label class="checkbox-label">';
-                                                echo "<input type='checkbox' class='checkbox-input'>Solicitud de: " . $nombreEmisor;
+                                                echo '<input type="checkbox" class="checkbox-input" name="soli[]" value="' . $nombreEmisor .  '" id="soli">Solicitud de: ' . $nombreEmisor;
                                                 echo '</label>';
                                             } while (mysqli_stmt_fetch($stmtVerSolicitud));
                                             ?>
@@ -321,7 +321,7 @@ else {
                                 else 
                                 {
                                     // Si no hay resultados, muestra el mensaje "No hay solicitudes nuevas"
-                                    echo "<p class='dropdown-item'>No hay solicitudes nuevas</p>";
+                                    echo "<p class='dropdown-item'>No hay solicitudes</p>";
                                 }
 
                                 // Cierra la declaración preparada
