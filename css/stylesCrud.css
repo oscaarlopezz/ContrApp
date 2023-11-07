@@ -19,4 +19,33 @@ table thead {
 table thead th {
     text-align: center;
 }
+.checkbox-label {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el checkbox y el texto */
+}
+.checkbox-input {
+    margin-right: 10px; /* Espacio entre la casilla de verificación y el texto */
+    margin-left: 10px; /* Espacio entre la casilla de verificación y el texto */
+}
+.dropdown-menu {
+    width: 200px; /* Puedes ajustar el valor según tus necesidades */
+}
+.boton-envio {
+    display: block;
+    margin: 0 auto;
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center; /* Centrar el texto horizontalmente */
+    line-height: 25px; /* Centrar el texto verticalmente */
+    height: 28px;
+    width: 80px;
+}
+
+.boton-envio:hover {
+    background-color: rgb(48, 10, 238);
+}
+
 

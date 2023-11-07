@@ -124,18 +124,25 @@
                                                     if (mysqli_stmt_fetch($stmtVerSolicitud)) 
                                                     {
                                                         // Mostrar los resultados aquí
-                                                        do 
-                                                        {
-                                                            // Procesa y muestra las solicitudes
-                                                            echo "<p class='dropdown-item'>Solicitud de: " . $nombreEmisor . "</p>";
-                                                        } 
-                                                        while (mysqli_stmt_fetch($stmtVerSolicitud));
+                                                        ?>
+                                                            <form action="../CRUD/aceptarSolicitud.php" method="post">
+                                                                <?php
+                                                                do {
+                                                                    // Procesa y muestra las solicitudes
+                                                                    echo '<label class="checkbox-label">';
+                                                                    echo "<input type='checkbox' class='checkbox-input'>Solicitud de: " . $nombreEmisor;
+                                                                    echo '</label>';
+                                                                } while (mysqli_stmt_fetch($stmtVerSolicitud));
+                                                                ?>
+                                                                <input type="submit" value="Enviar" id="enviar" class="boton-envio">
+                                                            </form>
+                                                        <?php
                                                     } 
                                                     
                                                     else 
                                                     {
                                                         // Si no hay resultados, muestra el mensaje "No hay solicitudes nuevas"
-                                                        echo "<p class='dropdown-item'>No hay solicitudes nuevas</p>";
+                                                        echo "<p class='dropdown-item'>No hay solicitudes.</p>";
                                                     }
 
                                                     // Cierra la declaración preparada
@@ -189,7 +196,7 @@
                                 $fecha = $fila['fecha'];
                                 echo "<tr>";
                                 echo "<td>$usuarioAmigo</td>";
-                                echo "<td class='align-middle text-center'><a href='../view/chat.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
+                                echo "<td class='align-middle text-center'><a href='../procesos/chat_p.php ?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
                                 echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
                                 echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
                                 echo "<td>$fecha</td>";
@@ -297,11 +304,19 @@ else {
                                 if (mysqli_stmt_fetch($stmtVerSolicitud)) 
                                 {
                                     // Mostrar los resultados aquí
-                                    do 
-                                    {
-                                        // Procesa y muestra las solicitudes
-                                        echo "<p class='dropdown-item'>Solicitud de: " . $nombreEmisor . "</p>";
-                                    } while (mysqli_stmt_fetch($stmtVerSolicitud));
+                                    ?>
+                                        <form action="../CRUD/aceptarSolicitud.php" method="post">
+                                            <?php
+                                            do {
+                                                // Procesa y muestra las solicitudes
+                                                echo '<label class="checkbox-label">';
+                                                echo "<input type='checkbox' class='checkbox-input'>Solicitud de: " . $nombreEmisor;
+                                                echo '</label>';
+                                            } while (mysqli_stmt_fetch($stmtVerSolicitud));
+                                            ?>
+                                            <input type="submit" value="Enviar" id="enviar" class="boton-envio">
+                                        </form>
+                                    <?php
                                 } 
                                 else 
                                 {
