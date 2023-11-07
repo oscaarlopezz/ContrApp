@@ -41,11 +41,13 @@ if (mysqli_num_rows($resultado) > 0) {
         } else{
             $float = "left";
         }
-        echo '<div class="mensaje" style="text-align: ' . $float . '; width: 100%">';
-        echo '<h6>' . $row['emisor'] . '</h6>';
-        echo '<label for="mensaje">' . $row['mensaje'] . '</label>';
-        echo '<p>' . $row['fecha_envio'] . '</p>';
-        echo '</div>';
+        ?>
+        <div class="mensaje" style="text-align: <?php echo $float ; ?>">
+        <h6><?php echo $row['emisor'];?></h6>
+        <label for="mensaje"><?php echo $row['mensaje'];?></label>
+        <p><?php echo $row['fecha_envio'];?></p>
+        </div>
+        <?php
     }
 } else {
     echo "No hay mensajes.";

@@ -16,6 +16,9 @@ body {
     overflow-y: scroll;
     margin: 5% 25%;
 }
+.mensaje {
+    width: 100%;
+}
 /* .screen {
     height: 100%;
     width: 50%;
