@@ -18,8 +18,9 @@ body {
     background-image: url("https://wallpaperaccess.com/full/8351171.gif");
 }
 .pagina {
+    height: 100%;
     width: 50%;
-    height: 650px;
+    /* height: 650px; */
     padding: 4% 25%;
 }
 .chat {
@@ -74,19 +75,22 @@ body {
     height: 175px;
 }
 */
-#enviarM form {
-    height: 100px;
+#enviarM {
+    /* margin: 0;
+    padding: 0; */
+    height: 20%;
     width: 100%;
     /* padding: 0 5%; */
 }
 
 #enviarM input {
-    border-radius: 10px;
+    border-radius: 1%;
     width: 80%;
     float: left;
 }
 #enviarM button {
     background-color: #3e838c;
     width: 20%;
-    border-radius: 10px;
+    float: right;
+    border-radius: 1%;
 }
