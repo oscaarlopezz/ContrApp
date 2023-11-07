@@ -30,7 +30,7 @@ if (mysqli_stmt_num_rows($stmt_select) > 0) {
     
     // Ejecutar la sentencia DELETE
     if (mysqli_stmt_execute($stmt_delete)) {
-        echo "Eliminación exitosa";
+    header('Location: ../view/exito.php?elimacionOK');    
     } else {
         echo "Error al eliminar: " . mysqli_error($conn);
     }
