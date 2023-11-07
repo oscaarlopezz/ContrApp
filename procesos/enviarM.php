@@ -1,8 +1,10 @@
 <?php
-include_once('../procesos/conexion.php');
-$id_user = $_POST['id_user'];
-$receptor = $_POST['receptor'];
+include_once('../herramientas/conexion.php');
+$id_user2 = $_POST['id_user'];
+$receptor2 = $_POST['receptor'];
 $mensaje = $_POST['mensaje'];
+$id_user = intval($id_user2);
+$receptor = intval($receptor2);
 // $id_user = 1;
 // $receptor = 2;
 // $mensaje = "Hola me llamo Oscar";

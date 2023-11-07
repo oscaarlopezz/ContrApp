@@ -38,15 +38,20 @@ if (mysqli_num_rows($resultado) > 0) {
         $id_emisor = intval($row['id_emisor']);
         if ($id_emisor === $id_user) {
             $float = "right";
+            $color = "#063940";
+            $texto = "#ece1c3";
         } else{
             $float = "left";
+            $color = "#ece1c3";
+            $texto = "#063940";
         }
         ?>
-        <div class="mensaje" style="text-align: <?php echo $float ; ?>">
-        <h6><?php echo $row['emisor'];?></h6>
-        <label for="mensaje"><?php echo $row['mensaje'];?></label>
-        <p><?php echo $row['fecha_envio'];?></p>
-        </div>
+            <div class="mensaje" style="float: <?php echo $float ; ?>; color: <?php echo $texto ; ?>; background-color: <?php echo $color ; ?>;">
+                <h6><?php echo $row['emisor'];?></h6>
+                <label for="mensaje"><?php echo $row['mensaje'];?></label>
+                <p><?php echo $row['fecha_envio'];?></p>
+            </div>
+
         <?php
     }
 } else {

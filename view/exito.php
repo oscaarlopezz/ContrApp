@@ -11,6 +11,7 @@
         $user = $_SESSION['user'];
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,12 +42,12 @@
             mysqli_stmt_close($stmtIdUser);
         }
 
-        $consultaBuscarAmigos = "SELECT u.username as amigo, a.FechaConfirmacion as fecha FROM amistades a INNER JOIN usuarios u ON a.usuario_2 = u.id WHERE a.usuario_1 = ?";
+        $consultaBuscarAmigos = "SELECT u.id as id, u.username as amigo, a.FechaConfirmacion as fecha FROM amistades a INNER JOIN usuarios u ON a.usuario_1 = u.id OR a.usuario_2 = u.id WHERE (a.usuario_1 = ? OR a.usuario_2 = ?) AND u.id <> ?;";
         $stmtBuscarAmigos = mysqli_stmt_init($conn);
 
         if (mysqli_stmt_prepare($stmtBuscarAmigos, $consultaBuscarAmigos)) 
         {
-            mysqli_stmt_bind_param($stmtBuscarAmigos, "i", $resultadoIdUser);
+            mysqli_stmt_bind_param($stmtBuscarAmigos, "iii", $resultadoIdUser, $resultadoIdUser, $resultadoIdUser);
             mysqli_stmt_execute($stmtBuscarAmigos);
             $resultados = mysqli_stmt_get_result($stmtBuscarAmigos);
 
@@ -196,9 +197,28 @@
                                 $fecha = $fila['fecha'];
                                 echo "<tr>";
                                 echo "<td>$usuarioAmigo</td>";
-                                echo "<td class='align-middle text-center'><a href='../procesos/chat_p.php ?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
+                                // echo "<td class='align-middle text-center'><a href='../procesos/chat_p.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
+                                ?><td class='align-middle text-center'>
+                                <form method="POST" action="../view/chat.php">
+                                  <input type="hidden" name="id_user" value="<?php echo $resultadoIdUser; ?>">
+                                  <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>">
+                                  <button type="submit">
+                                    <i class='fas fa-paper-plane'></i>
+                                  </button>
+                                </form>
+                              </td>
+                              <?php
                                 echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
-                                echo "<td class='align-middle text-center'><a href='../CRUD/eliminar.php?amigo=$usuarioAmigo'><i class='fas fa-trash-alt'></i></a></td>";
+                                ?><td class='align-middle text-center'>
+                                <form method="POST" action="../CRUD/eliminar.php">
+                                  <input type="hidden" name="id_user" value="<?php echo $resultadoIdUser; ?>">
+                                  <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>">
+                                  <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar a <?php echo $fila['amigo']; ?> de tu lista de amigos?')">
+                                    <i class='fas fa-trash-alt'></i>
+                                  </button>
+                                </form>
+                              </td>
+                              <?php
                                 echo "<td>$fecha</td>";
                                 echo "</tr>";
                             }

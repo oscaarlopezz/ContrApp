@@ -1,8 +1,8 @@
 <?php
 include_once('../herramientas/conexion.php');
 
-// // Recuperar los datos enviados a través de POST
-$id_user2 = $_POST['user'];
+// Recuperar los datos enviados a través de POST
+$id_user2 = $_POST['id_user'];
 $receptor2 = $_POST['amigo'];
 $id_user = intval($id_user2);
 $receptor = intval($receptor2);

@@ -22,11 +22,16 @@ $receptor = $_SESSION['receptor'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
     <link rel="stylesheet" href="../css/style.css">
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Lora&family=Nunito:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php
             // include_once('../procesos/conexion.php');
             ?>
+<div class="pagina">
     <div class="chat" id="chat-container">
 
     </div>
@@ -34,6 +39,7 @@ $receptor = $_SESSION['receptor'];
             <input type="text" style="width: 80%; float: left" id="mensaje">
             <button type="submit" style="margin-left: 3%; border-radius: 10px;" onclick="Enviar()">Enviar</button>
     </form>
+</div>
 <script>
 function fetchMessages() {
     const chatContainer = document.getElementById('chat-container');
