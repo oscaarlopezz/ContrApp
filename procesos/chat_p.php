@@ -48,8 +48,8 @@ if (mysqli_num_rows($resultado) > 0) {
         ?>
             <div class="mensaje" style="float: <?php echo $float ; ?>; color: <?php echo $texto ; ?>; background-color: <?php echo $color ; ?>;">
                 <h6><?php echo $row['emisor'];?></h6>
-                <label for="mensaje"><?php echo $row['mensaje'];?></label>
-                <p><?php echo $row['fecha_envio'];?></p>
+                <p><?php echo $row['mensaje'];?></p>
+                <label><?php echo $row['fecha_envio'];?></label>
             </div>
 
         <?php

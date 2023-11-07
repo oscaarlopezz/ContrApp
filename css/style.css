@@ -19,12 +19,14 @@ body {
 }
 .pagina {
     width: 50%;
-    height: 500px;
-    padding: 5% 25%;
+    height: 650px;
+    padding: 4% 25%;
 }
 .chat {
     height: 80%;
+    width: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .mensaje {
     width: 50%;
@@ -32,18 +34,30 @@ body {
     margin: 1%;
     padding: 2%;
     border-radius: 10px;
+    
+    /* white-space: pre-line; */
     /* color: #ece1c3; */
 }
+/* .mensaje_content {
+    left: 50%;
+    right: 50%;
+    position: absolute;
+} */
 .mensaje h6 {
     font-size: 1vw;
     margin: 0;
 }
-.mensaje label {
-    font-size: 1.5vw;
-    margin: 0;
-}
 .mensaje p {
-    font-size: 0.7vw;
+    /* height: auto; */
+    width: 200px;
+    font-size: 1.7vw;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    white-space: initial;
+}
+.mensaje label {
+    font-size: 0.8vw;
     margin: 0;
 }
 /* .screen {
@@ -60,15 +74,19 @@ body {
     height: 175px;
 }
 */
-#enviarM {
+#enviarM form {
     height: 100px;
-    width: 50%;
-    margin: 0 25%;
+    width: 100%;
+    /* padding: 0 5%; */
 }
 
 #enviarM input {
     border-radius: 10px;
+    width: 80%;
+    float: left;
 }
-#enviarM input[type="submit"] {
-    color: #3e838c;
+#enviarM button {
+    background-color: #3e838c;
+    width: 10%;
+    border-radius: 10px;
 }

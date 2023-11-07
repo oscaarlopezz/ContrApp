@@ -3,8 +3,8 @@
 session_start();
 
 // Comprueba si los valores están presentes en la URL y configúralos en las variables de sesión
-if (isset($_POST['user'])) {
-    $_SESSION['id_user'] = $_POST['user'];
+if (isset($_POST['id_user'])) {
+    $_SESSION['id_user'] = $_POST['id_user'];
 }
 
 if (isset($_POST['amigo'])) {
@@ -36,8 +36,8 @@ $receptor = $_SESSION['receptor'];
 
     </div>
     <form id="enviarM">
-            <input type="text" style="width: 80%; float: left" id="mensaje">
-            <button type="submit" style="margin-left: 3%; border-radius: 10px;" onclick="Enviar()">Enviar</button>
+            <input type="text" id="mensaje">
+            <button type="submit" onclick="Enviar()">Enviar</button>
     </form>
 </div>
 <script>
