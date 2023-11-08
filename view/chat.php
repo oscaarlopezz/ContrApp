@@ -37,7 +37,7 @@ $receptor = $_SESSION['receptor'];
     </div>
     <form id="enviarM">
         <input type="text" id="mensaje">
-        <button type="submit" onclick="Enviar()">Enviar</button>
+        <button type="submit" onclick="Enviar(event)">Enviar</button>
     </form>
 </div>
 <script>
@@ -75,31 +75,38 @@ document.addEventListener("DOMContentLoaded", fetchMessages);
     // Cuando el input cambie, ejecuta la función fetchMessages
     fetchMessages();
   });
-    
 
-    function Enviar() {
-        const id_user = <?php echo $id_user; ?>;
-        const receptor = <?php echo $receptor; ?>;
-        const mensajeValor = document.getElementById('mensaje');
-        const mensaje = mensajeValor.value;
-        const url = '../procesos/enviarM.php'; // Reemplaza con la URL de tu script PHP
+function Enviar(event) {
+    event.preventDefault(); // Evita que se envíe el formulario automáticamente
 
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // chatContainer.innerHTML = xhr.responseText;
-                fetchMessages();
-            }
-        };
+    const id_user = <?php echo $id_user; ?>;
+    const receptor = <?php echo $receptor; ?>;
+    const mensajeValor = document.getElementById('mensaje');
+    const mensaje = mensajeValor.value;
 
-        xhr.open('POST', url, true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        
-        // Define los datos que deseas enviar en el cuerpo de la solicitud
-        const data = `id_user=${id_user}&receptor=${receptor}&mensaje=${mensaje}`;
-        
-        xhr.send(data);
+    // Verifica si el mensaje no está vacío
+    if (mensaje.trim() === '') {
+        return; // No se envía si el mensaje está vacío
     }
+
+    const url = '../procesos/enviarM.php'; // Reemplaza con la URL de tu script PHP
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // chatContainer.innerHTML = xhr.responseText;
+            fetchMessages();
+        }
+    };
+
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    // Define los datos que deseas enviar en el cuerpo de la solicitud
+    const data = `id_user=${id_user}&receptor=${receptor}&mensaje=${mensaje}`;
+
+    xhr.send(data);
+}
 </script>
 
 </body>
