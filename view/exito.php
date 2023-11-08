@@ -17,12 +17,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de amigos de <?php echo $user ?></title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+     <!-- Título personalizado -->
+    <title>Página de amigos de <?php echo $user ?></title> <!-- Título personalizado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"> <!-- Estilos BootStrap -->
+    <!-- Scripts BootStrap -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <!-- Iconos FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Estilos CSS -->
     <link rel="stylesheet" href="../css/stylesCrud.css">
 </head>
 
@@ -198,18 +202,25 @@
                                 echo "<tr>";
                                 echo "<td>$usuarioAmigo</td>";
                                 // echo "<td class='align-middle text-center'><a href='../procesos/chat_p.php?amigo=$usuarioAmigo'><i class='fas fa-paper-plane'></i></a></td>";
-                                ?><td class='align-middle text-center'>
-                                <form method="POST" action="../view/chat.php">
-                                  <input type="hidden" name="id_user" value="<?php echo $resultadoIdUser; ?>">
-                                  <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>">
-                                  <button type="submit">
-                                    <i class='fas fa-paper-plane'></i>
-                                  </button>
-                                </form>
-                              </td>
-                              <?php
-                                echo "<td class='align-middle text-center'><a href='../CRUD/editar.php?amigo=$usuarioAmigo'><i class='fas fa-edit'></i></a></td>";
-                                ?><td class='align-middle text-center'>
+                                ?>
+                                    <td class='align-middle text-center'>
+                                    <form method="POST" action="../view/chat.php">
+                                    <input type="hidden" name="id_user" value="<?php echo $resultadoIdUser; ?>">
+                                    <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>">
+                                    <button type="submit">
+                                        <i class='fas fa-paper-plane'></i>
+                                    </button>
+                                    </form>
+                                </td>
+
+                                <td class='align-middle text-center'>
+                                    <form method="POST" action="../CRUD/editar.php">
+                                    <input type="hidden" name="id_user" value="<?php echo $resultadoIdUser; ?>">
+                                    <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>"><button><i class='fa-solid fa-pen-to-square'></i></button>
+                                    </form>
+                                </td>
+
+                                <td class='align-middle text-center'>
                                 <form method="POST" action="../CRUD/eliminar.php">
                                   <input type="hidden" name="id_user" value="<?php echo $resultadoIdUser; ?>">
                                   <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>">
