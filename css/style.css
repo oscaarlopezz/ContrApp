@@ -29,7 +29,7 @@ body {
 .chat {
     height: 80%;
     width: 100%;
-    overflow-y: hidden; /* Oculta la barra de desplazamiento vertical */
+    overflow-y: visible; /* Oculta la barra de desplazamiento vertical */
     overflow-x: hidden;
 }
 
@@ -47,7 +47,7 @@ body {
 
 .mensaje p {
     width: 200px;
-    font-size: 1.2vw;
+    font-size: 1vw;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -71,6 +71,5 @@ body {
 button {
     width: 50px;
     height: 40px;
-    background: lightgreen;
-    border-radius: 10px;
+    background: rgb(7, 229, 7);
 }
