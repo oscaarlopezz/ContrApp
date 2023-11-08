@@ -131,11 +131,11 @@
                                                                 do {
                                                                     // Procesa y muestra las solicitudes
                                                                     echo '<label class="checkbox-label">';
-                                                                    echo '<input type="checkbox" class="checkbox-input" name="soli" id="soli">Solicitud de: ' . $nombreEmisor;
+                                                                    echo '<input type="checkbox" class="checkbox-input" name="soli[]" id="soli" value="'. $nombreEmisor .'">Solicitud de: ' . $nombreEmisor;
                                                                     echo '</label>';
                                                                 } while (mysqli_stmt_fetch($stmtVerSolicitud));
                                                                 ?>
-                                                                <input type="submit" value="Enviar" id="enviar" class="boton-envio">
+                                                                <input type="submit" value="Aceptar" id="enviar" class="boton-envio">
                                                             </form>
                                                         <?php
                                                     } 
@@ -334,7 +334,7 @@ else {
                                                 echo '</label>';
                                             } while (mysqli_stmt_fetch($stmtVerSolicitud));
                                             ?>
-                                            <input type="submit" value="Enviar" id="enviar" class="boton-envio">
+                                            <input type="submit" value="Aceptar" id="enviar" class="boton-envio">
                                         </form>
                                     <?php
                                 } 

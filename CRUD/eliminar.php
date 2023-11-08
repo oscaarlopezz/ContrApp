@@ -32,7 +32,7 @@ if (mysqli_stmt_num_rows($stmt_select) > 0) {
     if (mysqli_stmt_execute($stmt_delete)) {
     header('Location: ../view/exito.php?elimacionOK');    
     } else {
-        echo "Error al eliminar: " . mysqli_error($conn);
+        header('Location: ../view/exito.php?elimacionMal');    
     }
 } else {
     // Si no se encontraron registros con la primera combinación, usar la segunda combinación
@@ -44,8 +44,8 @@ if (mysqli_stmt_num_rows($stmt_select) > 0) {
     
     // Ejecutar la sentencia DELETE alternativa
     if (mysqli_stmt_execute($stmt_delete)) {
-        echo "Eliminación exitosa";
+        header('Location: ../view/exito.php?elimacionOK');    
     } else {
-        echo "Error al eliminar: " . mysqli_error($conn);
+        header('Location: ../view/exito.php?elimacionMal');    
     }
 }
