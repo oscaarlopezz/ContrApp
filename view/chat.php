@@ -36,8 +36,8 @@ $receptor = $_SESSION['receptor'];
 
     </div>
     <form id="enviarM">
-            <input type="text" id="mensaje">
-            <button type="submit" onclick="Enviar()">Enviar</button>
+        <input type="text" id="mensaje">
+        <button type="submit" onclick="Enviar()">Enviar</button>
     </form>
 </div>
 <script>

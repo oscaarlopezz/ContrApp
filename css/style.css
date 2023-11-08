@@ -3,94 +3,74 @@
     font-family: 'Lora', serif;
     font-family: 'Nunito', sans-serif;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
+
 html, body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    /* overflow: hidden; */
-
+    overflow: hidden; /* Evita la barra de desplazamiento vertical */
 }
+
 body {
     background-image: url("https://wallpaperaccess.com/full/8351171.gif");
 }
+
 .pagina {
     height: 100%;
     width: 50%;
-    /* height: 650px; */
     padding: 4% 25%;
 }
+
 .chat {
     height: 80%;
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: hidden; /* Oculta la barra de desplazamiento vertical */
     overflow-x: hidden;
 }
+
 .mensaje {
     width: 50%;
-    /* background-color: #063940; */
     margin: 1%;
     padding: 2%;
     border-radius: 10px;
-    
-    /* white-space: pre-line; */
-    /* color: #ece1c3; */
 }
-/* .mensaje_content {
-    left: 50%;
-    right: 50%;
-    position: absolute;
-} */
+
 .mensaje h6 {
-    font-size: 1vw;
+    font-size: 0.7vw;
     margin: 0;
 }
+
 .mensaje p {
-    /* height: auto; */
     width: 200px;
-    font-size: 1.7vw;
+    font-size: 1.2vw;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     white-space: initial;
 }
+
 .mensaje label {
     font-size: 0.8vw;
     margin: 0;
 }
-/* .screen {
-    height: 100%;
-    width: 50%;
-    margin: 0 25%;
-}
-.chat {
-    width: 80%;
-    height: 400px;
-    overflow-y: scroll;
-}
-.chat div {
-    height: 175px;
-}
-*/
+
 #enviarM {
-    /* margin: 0;
-    padding: 0; */
-    height: 20%;
-    width: 100%;
-    /* padding: 0 5%; */
+    display: flex;
+    border-radius: 10px;
 }
 
-#enviarM input {
-    border-radius: 1%;
-    width: 80%;
-    float: left;
+#mensaje {
+    flex: 1;
 }
-#enviarM button {
-    background-color: #3e838c;
-    width: 20%;
-    float: right;
-    border-radius: 1%;
+
+button {
+    width: 50px;
+    height: 40px;
+    background: lightgreen;
+    border-radius: 10px;
 }
