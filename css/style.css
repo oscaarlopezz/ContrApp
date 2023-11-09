@@ -23,7 +23,7 @@ body {
 .pagina {
     height: 100%;
     width: 50%;
-    padding: 4% 25%;
+    padding: 0% 25%;
 }
 
 .chat {
@@ -62,6 +62,7 @@ body {
 #enviarM {
     display: flex;
     border-radius: 10px;
+    margin-top: 30px;
 }
 
 #mensaje {
@@ -72,6 +73,8 @@ body {
     width: 50px;
     height: 40px;
     background: rgb(7, 229, 7);
+    width: 90px;
+    border-radius: 5px;
 }
 
 #botonVolver {
@@ -81,4 +84,5 @@ body {
     margin-top: 5px;
     margin-left: 5px;
     width: 90px;
+    border-radius: 5px;
 }
