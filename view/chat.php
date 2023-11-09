@@ -96,6 +96,7 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         // chatContainer.innerHTML = xhr.responseText;
                         fetchMessages();
+                        mensajeValor.value = ''; // Vaciar solo el input de texto
                     }
                 };
 
