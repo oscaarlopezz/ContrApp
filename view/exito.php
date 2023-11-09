@@ -64,9 +64,8 @@
                 <table class="table table-striped table-bordered" style="background: #FFFF;">
                     <thead class="thead-dark text-center">
                         <tr>
-                            <th colspan="4">¡Bienvenido <?php echo $user ?>! Esta es tu lista de amigos:</th>
-                            <th class="text-right">
-                                <div class="btn-group" role="group" aria-label="Botones">
+                            <th colspan="4">¡Bienvenido <?php echo $user ?>! Esta es tu lista de amigos:
+                                <div class="btn-group" role="group" aria-label="Botones" style="margin-left: 20vw;">
                                     <div>
                                         <button type="button" class="btn btn-success mr-2">
                                             <a href="../CRUD/enviarSolicitud.php" style="color: white; text-decoration: none;">Añadir</a>
@@ -180,7 +179,6 @@
                         <tr>
                             <td>Nombre del Amigo</td>
                             <td>Abrir chat</td>
-                            <td>Editar</td>
                             <td>Eliminar</td>
                             <td>Fecha</td>
                         </tr>
@@ -210,13 +208,6 @@
                                     <button type="submit">
                                         <i class='fas fa-paper-plane'></i>
                                     </button>
-                                    </form>
-                                </td>
-
-                                <td class='align-middle text-center'>
-                                    <form method="POST" action="../CRUD/editar.php">
-                                    <input type="hidden" name="id_user" value="<?php echo $resultadoIdUser; ?>">
-                                    <input type="hidden" name="amigo" value="<?php echo $fila['id']; ?>"><button><i class='fa-solid fa-pen-to-square'></i></button>
                                     </form>
                                 </td>
 
