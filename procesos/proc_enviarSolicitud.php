@@ -127,7 +127,7 @@ if ($resultadoIdSesion)
             else 
             {
                 // Si el usuario con el nombre proporcionado no existe, puedes redirigir al usuario a la página deseada
-                header('Location: ../view/exito.php');
+                header('Location: ../CRUD/enviarSolicitud.php?ElUsuarioNoExiste');
                 exit; // Asegura que el script se detiene después de redirigir
             }
         }
