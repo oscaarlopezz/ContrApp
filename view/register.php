@@ -12,8 +12,8 @@
                 <header>Registrarse</header>
                 <form action="../acciones/validarRegister.php" method="post">
                     <div class="field input">
-                        <label for="user">Nombre:</label>
-                        <input type="text" name="user" id="user">   
+                        <label for="name">Nombre:</label>
+                        <input type="text" name="name" id="name">   
                         <?php  
                             if (isset($_GET['nameVacio'])) 
                             {

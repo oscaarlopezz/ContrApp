@@ -15,6 +15,7 @@
 
     // Obtiene los valores del formulario.
     $user = $_POST['user'];
+    $name = $_POST['name'];
     $email = $_POST['email'];
     $pass = $_POST['pass'];
 
@@ -52,7 +53,7 @@
     }
 
     // Validación del campo de usuario.
-    if (validaCampoVacio($user))
+    if (validaCampoVacio($name))
     {
         // Agrega un parámetro a la cadena de errores si el campo de usuario está vacío.
         if (!$errores)
@@ -67,7 +68,7 @@
     else 
     {
         // Verifica si el campo de usuario contiene solo letras.
-        if(!preg_match("/^[a-zA-Z]*$/",$user))
+        if(!preg_match("/^[a-zA-Z]*$/",$name))
         {
             // Agrega un parámetro a la cadena de errores si el campo de usuario contiene caracteres no permitidos.
             if (!$errores)
@@ -165,6 +166,7 @@
         // Almacena los datos recibidos en un array.
         $datosRecibidos = array(
             'user' => $user,
+            'name'=> $name,
             'pass' => $pass,
             'email' => $email
         );
@@ -178,6 +180,7 @@
     {
         // Si no hay errores, establece las variables de sesión y redirecciona a la página de checkRegister.
         $_SESSION['user'] = $user;
+        $_SESSION['name'] = $name;
         $_SESSION['pass'] = $pass;
         $_SESSION['email'] = $email;
         

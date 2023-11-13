@@ -13,7 +13,7 @@
 
     if ($totalCorreo > 0) 
     {
-        // El correo electrónico ya exist, mostrar un mensaje de error.
+        // El correo electrónico ya existe, mostrar un mensaje de error.
         header('Location: ../view/register.php?error=El correo electrónico ya está registrado');
         exit();
     } 
@@ -37,13 +37,13 @@
     else 
     {
         // Si no existen, procede a insertar los datos en la base de datos
-        $consultaInsertarUser = "INSERT INTO usuarios (username, email, contraseña) VALUES (?, ?, ?)";
+        $consultaInsertarUser = "INSERT INTO usuarios (username, email, nombre, contraseña) VALUES (?, ?, ?, ?)";
         $stmtInsertarUser = mysqli_prepare($conn, $consultaInsertarUser);
 
         if ($stmtInsertarUser) 
         {
             $passEncriptada = hash("sha256", $_SESSION['pass']);
-            mysqli_stmt_bind_param($stmtInsertarUser, "sss", $_SESSION['user'], $_SESSION['email'], $passEncriptada);
+            mysqli_stmt_bind_param($stmtInsertarUser, "ssss", $_SESSION['user'], $_SESSION['email'], $_SESSION['name'], $passEncriptada);
             mysqli_stmt_execute($stmtInsertarUser);
             mysqli_stmt_close($stmtInsertarUser);
             mysqli_close($conn);
