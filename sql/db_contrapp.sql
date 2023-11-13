@@ -27,6 +27,12 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `amistades`
 --
 
+DROP DATABASE db_contrapp;
+
+CREATE DATABASE db_contrapp;
+
+USE db_contrapp;
+
 CREATE TABLE `amistades` (
   `id` int(11) NOT NULL,
   `usuario_1` int(11) NOT NULL,
