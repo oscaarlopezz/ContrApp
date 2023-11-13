@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/styles.css">
-        <script src="../js/boton.js"></script>
         <title>Log in / Sign in</title>
     </head>
     <body>
@@ -15,30 +14,60 @@
                     <div class="field input">
                         <label for="user">Nombre de usuario:</label>
                         <input type="text" name="user" id="user">   
-                        <p style="display: none; color: red; font-size: 15px;" id="alertauser">¡El formato de usuario que intenta introducir no es valido!</p> <!-- El mensaje de error permanece oculto hasta que el script detecta un error en el formato del texto introducido -->     
+                        <?php  
+                            if (isset($_GET['usernameVacio'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>Debes rellenar este campo.</p>";
+                            }
+
+                            if (isset($_GET['usernameMal'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>No puede contener números.</p>";
+                            }
+                        ?>               
                     </div>
 
                     <div class="field input">
                         <label for="email">Email:</label>
                         <input type="text" name="email" id="email">   
-                        <p style="display: none; color: red; font-size: 15px;" id="alertaEmail">¡Has de introducir un email válido!</p> <!-- El mensaje de error permanece oculto hasta que detecta que la contraseña es lo suficientemente larga. -->     
+                        <?php
+                            if (isset($_GET['emailVacio'])) {
+                                echo "<p style='color: red; font-weight: bold;'>Debes rellenar este campo.</p>";
+                            }
+
+                            if (isset($_GET['emailMal'])) {
+                                echo "<p style='color: red; font-weight: bold;'>Formato de correo electrónico inválido.</p>";
+                            }
+
+                            if (isset($_GET['emailDominioInvalido'])) {
+                                echo "<p style='color: red; font-weight: bold;'>El correo electrónico debe ser de dominio @gmail.com.</p>";
+                            }
+                        ?>                    
                     </div>
 
                     <div class="field input">
                         <label for="pass">Contraseña:</label>
                         <input type="password" name="pass" id="pass">    
-                        <p style="display: none; color: red; font-size: 15px;" id="alertapass">¡La contraseña debe de tener almenos 9 caracteres!</p> <!-- El mensaje de error permanece oculto hasta que detecta que la contraseña es lo suficientemente larga. -->         
+                        <?php  
+                            if (isset($_GET['passwordVacio'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>Debes rellenar este campo.</p>";
+                            }
+
+                            if (isset($_GET['passwordMal'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>Contraseña incorrecta.</p>";
+                            }
+                        ?>               
                     </div>
 
                     <div class="field">
-                        <input type="submit" name="btnEnviar" id="btnEnviar" class="boton" value="Enviar" disabled>
+                        <input type="submit" name="btnEnviar" id="btnEnviar" class="boton" value="Enviar">
                     </div>
 
                     <div class="links">
                         <p>¿Ya tienes cuenta? <a href="./login.php">Haz clic aquí e inicia sesión</a></p>
                     </div>
-
-                    <script src="../js/validacionRegister.js"></script> <!-- Este script valida el formato y si los campos están vacíos -->
                 </form>
             </div>
         </div>

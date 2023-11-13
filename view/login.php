@@ -9,7 +9,6 @@ session_destroy();
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/styles.css">
-        <script src="../js/botonLogin.js"></script>
         <title>Log in / Sign in</title>
     </head>
     
@@ -21,20 +20,39 @@ session_destroy();
                     <div class="field input">
                         <label for="user">Nombre de usuario:</label>
                         <input type="text" name="user" id="user">
-                        <p style="display: none; color: red; font-size: 15px;" id="alertauser">¡El formato de usuario que intenta introducir no es valido!</p> <!-- El mensaje de error permanece oculto hasta que el script detecta un error en el formato del texto introducido -->
-                    </div>
+                        <?php  
+                            if (isset($_GET['usernameVacio'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>Debes rellenar este campo.</p>";
+                            }
+
+                            if (isset($_GET['usernameMal'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>No puede contener números.</p>";
+                            }
+                        ?>               
+                </div>
                     <div class="field input">
                         <label for="pass">Contraseña:</label>
                         <input type="password" name="pass" id="pass">
-                        <p style="display: none; color: red; " id="alertapass">¡La contraseña debe de tener almenos 9 caracteres!</p> <!-- El mensaje de error permanece oculto hasta que detecta que la contraseña es lo suficientemente larga. -->
+                        <?php  
+                            if (isset($_GET['passwordVacio'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>Debes rellenar este campo.</p>";
+                            }
+
+                            if (isset($_GET['passwordMal'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>Contraseña incorrecta.</p>";
+                            }
+                        ?>               
                     </div>
                     <div class="field">
-                        <input type="submit" name="btnEnviar" class="boton" id="btnEnviar" value="Enviar" disabled>
+                        <input type="submit" name="btnEnviar" class="boton" id="btnEnviar" value="Enviar">
                     </div>
                     <div class="links">
                         <p>¿No tienes cuenta? <a href="./register.php">Haz clic aquí y crea una cuenta</a></p>
                     </div>
-                    <script src="../js/validacionLogin.js"></script> <!-- Este script valida el formato y si los campos están vacíos -->
                 </form>
             </div>
         </div>

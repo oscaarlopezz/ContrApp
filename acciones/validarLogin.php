@@ -8,18 +8,89 @@
         exit();
     }
 
-    // Si se ha enviado un valor para 'user', lo almacenamos en una variable de sesión llamada 'user'
-    if (isset($_POST['user'])) {
-        $_SESSION['user'] = $_POST['user'];
+    $errores = "";
+
+    $user = $_POST['user'];
+    $pass = $_POST['pass'];
+
+    include_once('../herramientas/funciones.php');
+
+    if (validaCampoVacio($user))
+    {
+        if (!$errores)
+        {
+            $errores .="?usernameVacio=true";
+        } 
+            
+        else 
+        {
+        $errores .="&usernameVacio=true";        
+        }
+    } 
+      
+    else 
+    {
+        if(!preg_match("/^[a-zA-Z]*$/",$user))
+        {
+            if (!$errores)
+            {
+                $errores .="?usernameMal=true";
+            } 
+            
+            else 
+            {
+                $errores .="&usernameMal=true";        
+            }
+        }
+    }
+    
+
+    if (validaCampoVacio($pass)) 
+    {
+        if (!$errores) 
+        {
+            $errores .= "?passwordVacio=true";
+        } 
+        
+        else 
+        {
+            $errores .= "&passwordVacio=true";
+        }
+    } 
+    
+    else 
+    {
+        if (!preg_match("/^.{9}$/", $pass)) 
+        {
+            if (!$errores) 
+            {
+                $errores .= "?passwordMal=true";
+            } 
+            
+            else 
+            {
+                $errores .= "&passwordMal=true";
+            }
+        }
     }
 
-    // Si se ha enviado un valor para 'pass', lo almacenamos en una variable de sesión llamada 'pass'
-    if (isset($_POST['pass'])) {
-        $pass = $_POST['pass'];
+    if ($errores != "") 
+    {
+        $datosRecibidos = array(
+            'user' => $user,
+            'pass' => $pass
+        );
+
+        $datosDevueltos=http_build_query($datosRecibidos);
+        header('location: '.'../view/login.php'. $errores. "&". $datosDevueltos);
+        exit();    
+    }
+    
+    else
+    {
+        $_SESSION['user'] = $user;
         $_SESSION['pass'] = $pass;
+        
+        header('Location: '.'./checkLogin.php');
     }
-
-    // Redirige al usuario a la página 'comprobarLogin.php'
-    header('Location: '.'./checkLogin.php');
-    exit();
 ?>
