@@ -51,6 +51,37 @@
         }
     }
 
+    // Validación del campo de usuario.
+    if (validaCampoVacio($user))
+    {
+        // Agrega un parámetro a la cadena de errores si el campo de usuario está vacío.
+        if (!$errores)
+        {
+            $errores .="?nameVacio=true";
+        } 
+        else 
+        {
+            $errores .="&nameVacio=true";        
+        }
+    } 
+    else 
+    {
+        // Verifica si el campo de usuario contiene solo letras.
+        if(!preg_match("/^[a-zA-Z]*$/",$user))
+        {
+            // Agrega un parámetro a la cadena de errores si el campo de usuario contiene caracteres no permitidos.
+            if (!$errores)
+            {
+                $errores .="?nameMal=true";
+            } 
+            else 
+            {
+                $errores .="&nameMal=true";        
+            }
+        }
+    }
+    
+
     // Validación del campo de contraseña.
     if (validaCampoVacio($pass)) 
     {

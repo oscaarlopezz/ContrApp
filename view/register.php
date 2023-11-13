@@ -12,6 +12,22 @@
                 <header>Registrarse</header>
                 <form action="../acciones/validarRegister.php" method="post">
                     <div class="field input">
+                        <label for="user">Nombre:</label>
+                        <input type="text" name="user" id="user">   
+                        <?php  
+                            if (isset($_GET['nameVacio'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>Debes rellenar este campo.</p>";
+                            }
+
+                            if (isset($_GET['nameMal'])) 
+                            {
+                                echo "<p style='color: red; font-weight: bold;'>No puede contener números.</p>";
+                            }
+                        ?>               
+                    </div>
+
+                    <div class="field input">
                         <label for="user">Nombre de usuario:</label>
                         <input type="text" name="user" id="user">   
                         <?php  
