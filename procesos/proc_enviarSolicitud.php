@@ -71,14 +71,14 @@ if ($resultadoIdSesion)
                 if (mysqli_num_rows($resultadoAmistades) > 0) 
                 {
                     // Redirige con un mensaje de error, ya son amigos
-                    header('Location: ../CRUD/enviarSolicitud.php?yaSonAmigos');
+                    header('Location: ../CRUD/enviarSolicitud.php?aviso=Ya son amigos');
                     exit();
                 }
                 else 
                 {
                     // Comprueba si el usuario que se quiere agregar es el mismo que el de la sesión
                     if ($userSesion === $_POST['user']) {
-                        header('Location: ../CRUD/enviarSolicitud.php?mismoUsuario'); // Redirige con un mensaje de error
+                        header('Location: ../CRUD/enviarSolicitud.php?aviso=No puedes agregarte a ti mismo'); // Redirige con un mensaje de error
                         exit;
                     } else 
                     {
@@ -99,7 +99,7 @@ if ($resultadoIdSesion)
 
                         if (mysqli_num_rows($resultadoSolicitudes) > 0) 
                         {
-                            header('Location: ../CRUD/enviarSolicitud.php?solicitudExiste');
+                            header('Location: ../CRUD/enviarSolicitud.php?aviso=solicitudExiste');
                         }
                         else 
                         {
@@ -116,11 +116,11 @@ if ($resultadoIdSesion)
 
                             if ($stmtInsertarSolicitudes) 
                             {
-                                header('Location: ../view/exito.php?solicitudEnviada');
+                                header('Location: ../view/exito.php?aviso=solicitudEnviada');
                             }
                             else 
                             {
-                                header('Location: ../view/exito.php?solicitudNoEnviada');
+                                header('Location: ../view/exito.php?aviso=solicitudNoEnviada');
                             }            
                         }
                     }
@@ -129,7 +129,7 @@ if ($resultadoIdSesion)
             else 
             {
                 // Si el usuario con el nombre proporcionado no existe, puedes redirigir al usuario a la página deseada
-                header('Location: ../CRUD/enviarSolicitud.php?ElUsuarioNoExiste');
+                header('Location: ../CRUD/enviarSolicitud.php?aviso=ElUsuarioNoExiste');
                 exit; // Asegura que el script se detiene después de redirigir
             }
         }

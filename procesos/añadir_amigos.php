@@ -2,17 +2,18 @@
 session_start();
 // Recibir datos del formulario AJAX
 $username = "%" . $_POST['username'] . "%";
+$sesion = $_SESSION['user'];
 include_once('../herramientas/conexion.php');
 if ($username === '%%') {
     echo "No se han encontrado resultados";
 }else{
 // Preparar la consulta SQL con una sentencia preparada para evitar inyecciones SQL
-$sql = "SELECT username, nombre FROM usuarios WHERE username LIKE ? or nombre LIKE ?";
+$sql = "SELECT username, nombre FROM usuarios WHERE (username LIKE ? or nombre LIKE ?) and username <> ?;";
 
 $stmt = mysqli_prepare($conn, $sql);
 
 // Vincular los parámetros a la sentencia
-mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+mysqli_stmt_bind_param($stmt, "sss", $username, $username, $sesion);
 
 // Ejecutar la sentencia
 mysqli_stmt_execute($stmt);

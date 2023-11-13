@@ -2,6 +2,10 @@
     session_start();
 
     $user = $_SESSION['user'];
+    if (isset($_GET['aviso'])){
+        echo '<script>alert("' . $_GET['aviso'] . '");</script>';
+    }
+    
 ?>
 
 <!DOCTYPE html>
