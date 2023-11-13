@@ -3,6 +3,8 @@ include('../herramientas/conexion.php');
 
 // Asegúrate de iniciar la sesión antes de usar $_SESSION
 session_start();
+// var_dump($_POST);
+// die();
 
 $userSesion = $_SESSION['user'];
 

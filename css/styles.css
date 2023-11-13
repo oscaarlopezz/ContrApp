@@ -120,4 +120,7 @@ body
 {
     margin-bottom: 15px;
 }
+table th {
+    width: 25%;
+}
 

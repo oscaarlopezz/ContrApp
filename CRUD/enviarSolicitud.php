@@ -23,26 +23,22 @@
         <div class="container">
             <div class="box form-box">
                 <header>¡Hey, <?php echo $user ?>! ¿A quién agregas?</header>
-                <form action="../procesos/proc_enviarSolicitud.php" method="post">
-                    <div class="field input">
-                        <label for="user">Nombre de usuario:</label>
-                        <input type="text" name="user" id="user">
-                        <p style="display: none; color: red; font-size: 15px;" id="alertauser">¡El formato de usuario que intenta introducir no es valido!</p> <!-- El mensaje de error permanece oculto hasta que el script detecta un error en el formato del texto introducido -->
-                    </div>
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Usuario</td>
+                            <td>Nombre</td>
+                            <td>Agregar</td>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado">
+                    </tbody>
+                </table>
+                <!-- <div class="usuarios"></div> -->
 
-                    <div class="field input">
-                        <label for="text">Correo:</label>
-                        <input type="email" name="email" id="email">
-                        <p style="display: none; color: red; " id="alertaemail">¡El email debe ser válido!</p> <!-- El mensaje de error permanece oculto hasta que detecta que la contraseña es lo suficientemente larga. -->
-                    </div>
-
-                    <div class="field">
-                        <input type="submit" name="btnEnviar" class="boton" id="btnEnviar" value="Enviar" disabled>
-                    </div>
-
-                    <script src="../js/validacionAñadir.js"></script> <!-- Este script valida el formato y si los campos están vacíos -->
-                </form>
-
+                <script src="../js/validacionAñadir.js"></script> <!-- Este script valida el formato y si los campos están vacíos -->
                 <a href="../view/exito.php" class="botonRojo">Volver</a>
             </div>
         </div>
